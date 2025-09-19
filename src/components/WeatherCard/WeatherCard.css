@@ -1,1 +1,21 @@
-/* placeholder */
+.weather-card {
+  position: relative;
+}
+
+.weather-card__temp {
+  color: rgba(255, 255, 255, 1);
+  font-size: 35px;
+  line-height: 40px;
+  margin: 0;
+  position: absolute;
+  top: 20px;
+  left: 16px;
+}
+
+.weather-card__image {
+  max-width: 100%;
+  max-height: 80px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
