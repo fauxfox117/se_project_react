@@ -1,7 +1,12 @@
-import "./Main.css";
+import "./ItemCard.css";
 
-function ItemCard() {
-  return <></>;
+function ItemCard({ item }) {
+  return (
+    <div>
+      <h2>{item.name}</h2>
+      <img src={item.link} alt={item.name} />
+    </div>
+  );
 }
 
 export default ItemCard;

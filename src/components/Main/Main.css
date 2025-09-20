@@ -1,1 +1,15 @@
-/* placeholder */
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.cards__text {
+  display: flex;
+}
+
+.cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
