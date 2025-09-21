@@ -5,7 +5,7 @@ function ModalWithForm({
   buttonText,
   title,
   activeModal,
-  handleCloseClick,
+  onClose,
   handleOverlayClose,
 }) {
   return (
@@ -17,11 +17,7 @@ function ModalWithForm({
     >
       <div className="modal__content">
         <h2 className="modal__title">{title}</h2>
-        <button
-          onClick={handleCloseClick}
-          className="modal__close-btn"
-          type="button"
-        >
+        <button onClick={onClose} className="modal__close-btn" type="button">
           CLOSE
         </button>
         <form className="modal__form">
