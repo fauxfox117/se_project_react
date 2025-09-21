@@ -96,6 +96,11 @@
   color: #00000080;
 }
 
+.modal__label.modal__label_type_radio:has(input:checked) {
+  cursor: pointer;
+  color: #000000;
+}
+
 .modal__submit-btn {
   background-color: #0000004d;
   color: #ffffff;

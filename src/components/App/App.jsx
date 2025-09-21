@@ -16,6 +16,20 @@ function App() {
     setActiveModal("");
   };
 
+  const handleRadioDeselect = (evt) => {
+    if (evt.target.getAttribute("data-was-checked") === "true") {
+      evt.target.checked = false;
+      evt.target.setAttribute("data-was-checked", "false");
+    } else {
+      document
+        .querySelectorAll(`input[name="${evt.target.name}"]`)
+        .forEach((radio) => {
+          radio.setAttribute("data-was-checked", "false");
+        });
+      evt.target.setAttribute("data-was-checked", "true");
+    }
+  };
+
   return (
     <div className="app">
       <div className="app__content">
@@ -49,21 +63,39 @@ function App() {
         <fieldset className="modal__radio-btns">
           <legend className="modal__legend">Select the weather type:</legend>
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
-            <input id="hot" type="radio" className="modal__radio-input" />
+            <input
+              id="hot"
+              type="radio"
+              name="weather"
+              className="modal__radio-input"
+              onClick={handleRadioDeselect}
+            />
             Hot
           </label>
           <label
             htmlFor="warm"
             className="modal__label modal__label_type_radio"
           >
-            <input id="warm" type="radio" className="modal__radio-input" />
+            <input
+              id="warm"
+              type="radio"
+              name="weather"
+              className="modal__radio-input"
+              onClick={handleRadioDeselect}
+            />
             Warm
           </label>
           <label
             htmlFor="cold"
             className="modal__label modal__label_type_radio"
           >
-            <input id="cold" type="radio" className="modal__radio-input" />
+            <input
+              id="cold"
+              type="radio"
+              name="weather"
+              className="modal__radio-input"
+              onClick={handleRadioDeselect}
+            />
             Cold
           </label>
         </fieldset>
