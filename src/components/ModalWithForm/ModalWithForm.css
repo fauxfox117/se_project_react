@@ -13,7 +13,7 @@
 
 .modal__opened {
   visibility: visible;
-  transition: 0.5s ease-in-out;
+  transition: 1s ease-in-out;
 }
 
 .modal__title {

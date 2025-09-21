@@ -1,26 +1,43 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
-// import ItemModal from "../ItemModal/ItemModal.jsx";
+import ItemModal from "../ItemModal/ItemModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
+  useEffect(() => {
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, []);
+
+  const handleEscape = (evt) => {
+    if (evt.key === "Escape") {
+      setActiveModal("");
+    }
+  };
+
   const handleAddClick = () => {
     setActiveModal("add-garment");
+  };
+
+  const handleCardClick = () => {
+    setActiveModal("preview");
+    setSelectedCard(card);
   };
 
   const closeActiveModal = () => {
     setActiveModal("");
   };
 
-  const handleCardClick = () => {
-    setSelectedCard(card);
-    setActiveModal(cardClick);
+  const handleOverlayClose = (evt) => {
+    if (evt.target === evt.currentTarget) closeActiveModal();
   };
 
   const handleRadioDeselect = (evt) => {
@@ -48,6 +65,7 @@ function App() {
         buttonText="Add Garment"
         activeModal={activeModal}
         handleCloseClick={closeActiveModal}
+        handleOverlayClose={handleOverlayClose}
       >
         <label htmlFor="name" className="modal__label">
           Name{" "}
@@ -107,10 +125,10 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
-      {/* <ItemModal
+      <ItemModal
         activeModal={activeModal}
         handleCloseClick={closeActiveModal}
-      ></ItemModal> */}
+      ></ItemModal>
     </div>
   );
 }
