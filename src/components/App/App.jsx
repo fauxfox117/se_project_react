@@ -3,10 +3,12 @@ import "./App.css";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+// import ItemModal from "../ItemModal/ItemModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "cold" });
   const [activeModal, setActiveModal] = useState("");
+  const [selectedCard, setSelectedCard] = useState({});
 
   const handleAddClick = () => {
     setActiveModal("add-garment");
@@ -14,6 +16,11 @@ function App() {
 
   const closeActiveModal = () => {
     setActiveModal("");
+  };
+
+  const handleCardClick = () => {
+    setSelectedCard(card);
+    setActiveModal(cardClick);
   };
 
   const handleRadioDeselect = (evt) => {
@@ -100,6 +107,10 @@ function App() {
           </label>
         </fieldset>
       </ModalWithForm>
+      {/* <ItemModal
+        activeModal={activeModal}
+        handleCloseClick={closeActiveModal}
+      ></ItemModal> */}
     </div>
   );
 }
