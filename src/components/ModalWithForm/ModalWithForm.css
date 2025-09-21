@@ -1,4 +1,5 @@
 .modal {
+  visibility: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -8,6 +9,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.modal__opened {
+  visibility: visible;
+  transition: 0.5s ease-in-out;
 }
 
 .modal__title {
