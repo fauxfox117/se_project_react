@@ -32,7 +32,7 @@ function App() {
           />
         </label>
         <fieldset className="modal__radio-btns">
-          <legend className="modal__legend">Select Weather Type:</legend>
+          <legend className="modal__legend">Select the weather type:</legend>
           <label htmlFor="hot" className="modal__label modal__label_type_radio">
             <input id="hot" type="radio" className="modal__radio-input" />
             Hot
