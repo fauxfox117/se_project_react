@@ -7,6 +7,9 @@
 
 .cards__text {
   display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100%;
 }
 
 .cards__list {
@@ -16,4 +19,5 @@
   padding: 0;
   list-style: none;
   gap: 21px;
+  justify-content: center;
 }

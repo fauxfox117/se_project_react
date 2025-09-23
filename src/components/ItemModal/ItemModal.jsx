@@ -9,7 +9,7 @@ function ItemModal({ card, activeModal, onClose, handleOverlayClose }) {
       <div className="modal__content modal__content_type_image">
         <button
           onClick={onClose}
-          className="modal__close-btn"
+          className="modal__image_close-btn"
           type="button"
         ></button>
         <img src={card.link} alt="" className="modal__image" />
