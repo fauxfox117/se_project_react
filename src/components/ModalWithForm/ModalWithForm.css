@@ -24,6 +24,12 @@
   position: absolute;
   top: 20px;
   right: 28px;
+  background: url("../../assets/formclose.png") 50% no-repeat;
+  border: none;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+  padding: 10px;
 }
 
 .modal__content {

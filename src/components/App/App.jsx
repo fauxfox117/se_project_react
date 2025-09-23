@@ -7,7 +7,7 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 
 function App() {
   const [weatherData, setWeatherData] = useState({ type: "all" });
-  const [activeModal, setActiveModal] = useState("preview");
+  const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
   useEffect(() => {
