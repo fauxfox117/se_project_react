@@ -14,7 +14,7 @@ export const filterWeatherData = (data) => {
   const result = {};
   result.city = data.name;
   result.temp = { F: data.main.temp };
-
+  result.type = getWeatherType(result.temp.F);
   return result;
 };
 
