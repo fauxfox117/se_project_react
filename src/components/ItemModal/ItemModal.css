@@ -13,7 +13,8 @@
   position: absolute;
   top: 20px;
   right: 28px;
-  background: transparent url("../../assets/close.png") 50% no-repeat invert;
+  background-image: url(/src/assets/close.png);
+  background-color: transparent;
   border: none;
   cursor: pointer;
   width: 14px;

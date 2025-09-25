@@ -4,15 +4,13 @@ function ModalWithForm({
   children,
   buttonText,
   title,
-  activeModal,
+  isOpen,
   onClose,
   handleOverlayClose,
 }) {
   return (
     <div
-      className={`modal ${
-        activeModal === "add-garment" ? "modal__opened" : ""
-      }`}
+      className={`modal ${isOpen ? "modal__opened" : ""}`}
       onClick={handleOverlayClose}
     >
       <div className="modal__content">
