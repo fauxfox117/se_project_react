@@ -1,2 +1,2 @@
 @import url("/src/vendor/normalize.css");
-@import url("/src/vendor/fonts.css"); /* ← This is what's missing! */
+@import url("/src/vendor/fonts.css");
