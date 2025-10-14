@@ -8,3 +8,34 @@
   margin: 0 auto;
   padding: 0 20px;
 }
+
+.temp__toggle-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+}
+
+.temp__toggle-label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 8px 12px;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.temp__toggle-input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.temp__toggle-text {
+  font-size: 16px;
+  color: #000;
+  margin-left: 8px;
+}

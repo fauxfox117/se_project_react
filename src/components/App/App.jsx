@@ -23,6 +23,8 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
 
+  const [temperatureUnit, setTemperatureUnit] = useState("F");
+
   useEffect(() => {
     document.addEventListener("keydown", handleEscape);
     return () => {
@@ -76,10 +78,28 @@ function App() {
       .catch(console.error);
   }, []);
 
+  const convertTemperature = (temp, unit) => {
+    // Just return the temperature in the correct unit
+    return Math.round(temp[unit]);
+  };
+
+  const handleToggleChange = () => {
+    setTemperatureUnit(temperatureUnit === "F" ? "C" : "F");
+  };
+
   return (
     <div className="app">
       <div className="app__content">
-        <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+        <Header
+          handleAddClick={handleAddClick}
+          location={weatherData?.city || "Loading..."}
+          weatherTemp={
+            weatherData?.temp
+              ? convertTemperature(weatherData.temp, temperatureUnit)
+              : ""
+          }
+          temperatureUnit={temperatureUnit}
+        />
         <Main
           weatherData={weatherData}
           handleCardClick={handleCardClick}
