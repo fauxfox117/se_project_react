@@ -1,0 +1,71 @@
+.toggle__switch-btn {
+  align-items: center;
+  opacity: 0;
+}
+
+.toggle__switch-checkbox {
+  height: 0;
+  width: 0;
+}
+
+.toggle__switch-label {
+  display: flex;
+  cursor: pointer;
+  width: 56px;
+  height: 28px;
+  margin: 0 20px 0 auto;
+  background: transparent;
+  border-radius: 100px;
+  position: relative;
+  transition: background-color 0.2s;
+  overflow: hidden;
+  border: 2px solid #7e7e7e;
+}
+
+.toggle__switch-circle {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 45px;
+  transition: 0.2s;
+  left: 0;
+  background: #000000;
+  transition: all 0.3s;
+}
+
+.toggle__switch-text {
+  position: absolute;
+  top: 5px;
+}
+.toggle__switch-text-F {
+  color: white;
+  left: 9px;
+}
+
+.toggle__switch-text-C {
+  color: rgb(97, 97, 97);
+  right: 8px;
+}
+
+.toggle__switch-btn:checked ~ .toggle__switch-circle {
+  left: 28px;
+}
+
+.toggle__switch-btn:checked ~ .toggle__switch-text-F {
+  color: #7e7e7e;
+}
+
+.toggle__switch-btn:checked ~ .toggle__switch-text-C {
+  color: #ffffff;
+}
+
+/* .toggle__switch-checkbox:checked
+  + .toggle__switch-label
+  .toggle__switch-button {
+  left: calc(100% - 2px);
+  transform: translateX(-100%);
+}
+
+.toggle__switch-label:active .toggle__switch-button {
+  width: 30px;
+} */
