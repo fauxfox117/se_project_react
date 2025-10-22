@@ -22,6 +22,11 @@
   border: 2px solid #7e7e7e;
 }
 
+.toggle__switch-label:hover {
+  transition: 0.4s;
+  border: 2px solid #000000;
+}
+
 .toggle__switch-circle {
   position: absolute;
   width: 28px;
@@ -30,7 +35,7 @@
   transition: 0.2s;
   left: 0;
   background: #000000;
-  transition: all 0.3s;
+  transition: all 0.5s;
 }
 
 .toggle__switch-text {
@@ -38,16 +43,16 @@
   top: 5px;
 }
 .toggle__switch-text-F {
-  color: white;
+  color: #ffffff;
   left: 9px;
 }
 
 .toggle__switch-text-C {
-  color: rgb(97, 97, 97);
+  color: #7e7e7e;
   right: 8px;
 }
 
-.toggle__switch-btn:checked ~ .toggle__switch-circle {
+.toggle__switch-btn:checked + .toggle__switch-circle {
   left: 28px;
 }
 
@@ -59,13 +64,13 @@
   color: #ffffff;
 }
 
-/* .toggle__switch-checkbox:checked
+.toggle__switch-checkbox:checked
   + .toggle__switch-label
-  .toggle__switch-button {
+  .toggle__switch-circle {
   left: calc(100% - 2px);
   transform: translateX(-100%);
 }
 
-.toggle__switch-label:active .toggle__switch-button {
-  width: 30px;
-} */
+.toggle__switch-label:hover .toggle__switch-circle {
+  width: 35px;
+}

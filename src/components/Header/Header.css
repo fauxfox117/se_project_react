@@ -1,6 +1,7 @@
 .header {
   display: flex;
   align-items: center;
+  /* justify-content: space-between; */
   padding: 32px 0 28px;
 }
 
@@ -12,9 +13,13 @@
   margin: 0;
 }
 
+.header__temperature {
+  margin-left: 20px;
+}
+
 .header__add-clothes-btn {
   cursor: pointer;
-  margin: 0 20px 0 auto;
+  margin: 0 20px 0 0;
   border: none;
   background: transparent;
 }

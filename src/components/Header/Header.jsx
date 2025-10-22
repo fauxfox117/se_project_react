@@ -1,8 +1,15 @@
 import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatar from "../../assets/avatar.png";
+import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 
-function Header({ handleAddClick, location, weatherTemp, temperatureUnit }) {
+function Header({
+  handleAddClick,
+  location,
+  weatherTemp,
+  temperatureUnit,
+  onToggleChange,
+}) {
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -16,6 +23,10 @@ function Header({ handleAddClick, location, weatherTemp, temperatureUnit }) {
       <div className="header__temperature">
         {weatherTemp !== undefined && `${weatherTemp}°${temperatureUnit}`}
       </div>
+      <ToggleSwitch
+        isOn={temperatureUnit === "C"}
+        handleToggleChange={onToggleChange}
+      />
       <button
         onClick={handleAddClick}
         type="button"

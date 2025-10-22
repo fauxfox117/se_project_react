@@ -1,10 +1,15 @@
+import { useContext } from "react";
+
 import "./ToggleSwitch.css";
+import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
 import React from "react";
 
-export default function ToggleSwitch({ isOn, handleToggleChange }) {
+export default function ToggleSwitch({ isOn }) {
+  const { handleToggleChange } = useContext(CurrentTempUnitContext);
+
   return (
     <>
-      <label className="toggle__switch-label" htmlFor={`toggle-switch-new`}>
+      <label className="toggle__switch-label">
         <input
           checked={isOn}
           onChange={handleToggleChange}
