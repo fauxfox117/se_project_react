@@ -23,7 +23,6 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-
   const [temperatureUnit, setTemperatureUnit] = useState("F");
 
   useEffect(() => {
@@ -37,6 +36,16 @@ function App() {
     if (evt.key === "Escape") {
       setActiveModal("");
     }
+  };
+
+  const onAddItem = (inputValues) => {
+    const newCardData = {
+      name: inputValues.name,
+      link: inputValues.link,
+      weather: inputValues.weather,
+    };
+    setClothingItems([...clothingItems, newCardData]);
+    closeActiveModal();
   };
 
   const handleAddClick = () => {
@@ -55,7 +64,6 @@ function App() {
   const handleOverlayClose = (evt) => {
     if (evt.target === evt.currentTarget) closeActiveModal();
   };
-
 
   useEffect(() => {
     getWeather(coordinates, apiKey)
@@ -103,6 +111,7 @@ function App() {
           isOpen={activeModal === "add-garment"}
           onClose={closeActiveModal}
           handleOverlayClose={handleOverlayClose}
+          onAddItem={onAddItem}
         ></AddItemModal>
         {/* <ModalWithForm
           isOpen={activeModal === "add-garment"}

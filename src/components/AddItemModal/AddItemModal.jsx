@@ -1,12 +1,20 @@
-import { useForm } from "../../hooks/useForm.jsx";
+import useForm from "../../hooks/useForm.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 function AddItemModal({ isOpen, onClose, onAddItem }) {
-  const { values, setValues, handleChange } = useForm({
+  const defaultValues = {
     name: "",
-    imageURL: "",
+    link: "",
     weather: "",
-  });
+  };
+
+  const { values, setValues, handleChange } = useForm(defaultValues);
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    onAddItem(values);
+    setValues(defaultValues);
+  }
 
   const handleRadioDeselect = (evt) => {
     if (evt.target.getAttribute("data-was-checked") === "true") {
@@ -28,7 +36,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
       buttonText="Add Garment"
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={onAddItem}
+      onSubmit={handleSubmit}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
@@ -36,8 +44,10 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
           type="text"
           className="modal__input"
           id="name"
+          name="name"
           placeholder="Name"
-          value="{}"
+          value={values.name}
+          onChange={handleChange}
         />
       </label>
       <label htmlFor="imageURL" className="modal__label">
@@ -46,7 +56,10 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
           type="url"
           className="modal__input"
           id="imageURL"
+          name="link"
           placeholder="Image URL"
+          value={values.link}
+          onChange={handleChange}
         />
       </label>
       <fieldset className="modal__radio-btns">
@@ -58,7 +71,10 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
             name="weather"
             value="hot"
             className="modal__radio-input"
+            values="Hot"
+            onChange={handleChange}
             onClick={handleRadioDeselect}
+            required
           />
           Hot
         </label>
@@ -69,7 +85,10 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
             name="weather"
             value="warm"
             className="modal__radio-input"
+            values="Warm"
+            onChange={handleChange}
             onClick={handleRadioDeselect}
+            required
           />
           Warm
         </label>
@@ -80,7 +99,10 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
             name="weather"
             value="cold"
             className="modal__radio-input"
+            values="Cold"
+            onChange={handleChange}
             onClick={handleRadioDeselect}
+            required
           />
           Cold
         </label>
