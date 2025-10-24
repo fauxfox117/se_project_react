@@ -1,1 +1,4 @@
-/* placeholder to avoid empty file submission */
+.profile {
+  display: flex;
+  flex-direction: row;
+}
