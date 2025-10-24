@@ -1,6 +1,13 @@
+import { useForm } from "../../hooks/useForm.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddItemModal({ isOpen, onClose, handleSubmit }) {
+function AddItemModal({ isOpen, onClose, onAddItem }) {
+  const { values, setValues, handleChange } = useForm({
+    name: "",
+    imageURL: "",
+    weather: "",
+  });
+
   const handleRadioDeselect = (evt) => {
     if (evt.target.getAttribute("data-was-checked") === "true") {
       evt.target.checked = false;
@@ -21,7 +28,7 @@ function AddItemModal({ isOpen, onClose, handleSubmit }) {
       buttonText="Add Garment"
       onClose={onClose}
       isOpen={isOpen}
-      onSubmit={handleSubmit}
+      onSubmit={onAddItem}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
@@ -30,6 +37,7 @@ function AddItemModal({ isOpen, onClose, handleSubmit }) {
           className="modal__input"
           id="name"
           placeholder="Name"
+          value="{}"
         />
       </label>
       <label htmlFor="imageURL" className="modal__label">
