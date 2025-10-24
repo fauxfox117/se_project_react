@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import {
   coordinates,
@@ -100,11 +101,20 @@ function App() {
             temperatureUnit={temperatureUnit}
             onToggleChange={handleToggleChange}
           />
-          <Main
-            weatherData={weatherData}
-            handleCardClick={handleCardClick}
-            clothingItems={clothingItems}
-          />
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Main
+                  weatherData={weatherData}
+                  handleCardClick={handleCardClick}
+                  clothingItems={clothingItems}
+                />
+              }
+            />
+            <Route path="/profile" element={<p>PROFILE</p>} />
+            <Route path="/clothes" element={<p>Clothes Section</p>} />
+          </Routes>
         </div>
         <Footer />
         <AddItemModal
