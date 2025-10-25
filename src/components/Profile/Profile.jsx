@@ -4,10 +4,10 @@ import Sidebar from "../Sidebar/Sidebar";
 
 function Profile() {
   return (
-    <div className="profile">
+    <section className="profile">
       <Sidebar />
       <ClothesSection />
-    </div>
+    </section>
   );
 }
 

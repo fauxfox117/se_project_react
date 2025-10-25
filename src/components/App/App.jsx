@@ -10,8 +10,6 @@ import {
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Profile from "../Profile/Profile.jsx";
-import Sidebar from "../Sidebar/Sidebar.jsx";
-import ClothesSection from "../ClothesSection/ClothesSection.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";

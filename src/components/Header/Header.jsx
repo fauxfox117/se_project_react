@@ -1,6 +1,6 @@
 import "./Header.css";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
+import avatarDefault from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
 
 function Header({
@@ -10,6 +10,8 @@ function Header({
   temperatureUnit,
   onToggleChange,
 }) {
+  const username = "Terrance Tegegne";
+  const avatar = avatarDefault;
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
@@ -35,8 +37,12 @@ function Header({
         + Add Clothes
       </button>
       <div className="header__user-container">
-        <p className="header__username">Terrence Tegegne</p>
-        <img src={avatar} alt="Terrence Tegegne" className="header__avatar" />
+        <p className="header__username">{username}</p>
+        <img
+          src={avatar || avatarDefault}
+          alt="Terrence Tegegne"
+          className="header__avatar"
+        />
       </div>
     </header>
   );
