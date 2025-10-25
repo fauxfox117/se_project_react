@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import {
-  coordinates,
-  apiKey,
-  defaultClothingItems,
-} from "../../utils/constants.js";
+import { coordinates, apiKey } from "../../utils/constants.js";
 
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
@@ -13,11 +9,12 @@ import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
+import { getItems } from "../../utils/api.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
 
 function App() {
-  const [clothingItems, setClothingItems] = useState(defaultClothingItems);
+  const [clothingItems, setClothingItems] = useState([]);
   const [weatherData, setWeatherData] = useState({
     type: " ",
     temp: { F: 999, C: 999 },
@@ -72,6 +69,12 @@ function App() {
       .then((data) => {
         const filteredData = filterWeatherData(data);
         setWeatherData(filteredData);
+      })
+      .catch(console.error);
+
+    getItems()
+      .then((data) => {
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
@@ -132,15 +135,6 @@ function App() {
           handleOverlayClose={handleOverlayClose}
           onAddItem={onAddItem}
         ></AddItemModal>
-        {/* <ModalWithForm
-          isOpen={activeModal === "add-garment"}
-          title="New Garment"
-          buttonText="Add Garment"
-          onClose={closeActiveModal}
-          handleOverlayClose={handleOverlayClose}
-        >
-         
-        </ModalWithForm> */}
         <ItemModal
           isOpen={activeModal === "preview"}
           card={selectedCard}

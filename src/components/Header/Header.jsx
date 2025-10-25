@@ -39,7 +39,7 @@ function Header({
       >
         + Add Clothes
       </button>
-      <NavLink to="/profile" type="button">
+      <NavLink to="/profile" type="button" className="header__nav-link">
         <div className="header__user-container">
           <p className="header__username">{username}</p>
           <img

@@ -43,9 +43,9 @@
   gap: 12px;
 }
 
-.header__user-container a {
+.header__nav-link {
   text-decoration: none;
-  color: inherit;
+  color: #000;
 }
 
 .header__username {
@@ -59,12 +59,4 @@
 .header__avatar {
   height: 40px;
   width: 40px;
-}
-
-.header__user-container a:hover,
-.header__user-container a:visited,
-.header__user-container a:focus,
-.header__user-container a:active {
-  text-decoration: none;
-  color: inherit;
 }
