@@ -8,6 +8,12 @@
   margin-right: 24px;
 }
 
+.header__logo-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+}
+
 .header__date-and-location {
   margin: 0;
   font-size: 20px;

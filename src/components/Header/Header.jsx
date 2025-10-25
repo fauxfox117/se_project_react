@@ -2,6 +2,7 @@ import "./Header.css";
 import logo from "../../assets/logo.svg";
 import avatarDefault from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch.jsx";
+import { Link } from "react-router-dom";
 
 function Header({
   handleAddClick,
@@ -18,7 +19,9 @@ function Header({
   });
   return (
     <header className="header">
-      <img src={logo} alt="WTWR Logo" className="header__logo" />
+      <Link to="/" className="header__logo-btn" type="button">
+        <img src={logo} alt="WTWR Logo" className="header__logo" />
+      </Link>
       <p className="header__date-and-location">
         {`${currentDate}, ${location || "Loading..."}`}
       </p>
@@ -38,11 +41,13 @@ function Header({
       </button>
       <div className="header__user-container">
         <p className="header__username">{username}</p>
-        <img
-          src={avatar || avatarDefault}
-          alt="Terrence Tegegne"
-          className="header__avatar"
-        />
+        <Link to="/profile" type="button">
+          <img
+            src={avatar || avatarDefault}
+            alt="Terrence Tegegne"
+            className="header__avatar"
+          />
+        </Link>
       </div>
     </header>
   );
