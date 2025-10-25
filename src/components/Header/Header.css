@@ -36,18 +36,35 @@
 }
 
 .header__user-container {
+  text-decoration: none;
+  color: inherit;
   display: flex;
   align-items: center;
   gap: 12px;
+}
+
+.header__user-container a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .header__username {
   margin: 0;
   font-size: 20px;
   font-weight: 700;
+  font-style: none;
+  color: #000;
 }
 
 .header__avatar {
   height: 40px;
   width: 40px;
+}
+
+.header__user-container a:hover,
+.header__user-container a:visited,
+.header__user-container a:focus,
+.header__user-container a:active {
+  text-decoration: none;
+  color: inherit;
 }
