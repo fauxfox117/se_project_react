@@ -1,3 +1,36 @@
 .clothes-section {
   margin: 16px auto;
+  flex-grow: 1;
+}
+
+.clothes-section__header {
+  display: flex;
+  flex-direction: row;
+}
+
+.cards {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.cards__text {
+  display: flex;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 100%;
+}
+
+.clothes-section__items {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    325px
+  ); /* Match the actual card width */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 20px;
+  justify-content: center;
 }

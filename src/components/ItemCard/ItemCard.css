@@ -20,7 +20,8 @@
 }
 
 .card__image {
-  width: 100%;
+  width: 325px;
+  height: 328px;
   border-radius: 19px;
   border: 1px solid #0000004d;
 }
