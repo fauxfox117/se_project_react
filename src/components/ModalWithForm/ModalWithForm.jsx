@@ -8,6 +8,7 @@ function ModalWithForm({
   onClose,
   handleOverlayClose,
   onSubmit,
+  isFormValid = true,
 }) {
   return (
     <div
@@ -25,7 +26,13 @@ function ModalWithForm({
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
 
-          <button className="modal__submit-btn" type="submit">
+          <button
+            className={`modal__submit-btn ${
+              !isFormValid ? "modal__submit-btn_disabled" : ""
+            }`}
+            type="submit"
+            disabled={!isFormValid}
+          >
             {buttonText}{" "}
           </button>
         </form>

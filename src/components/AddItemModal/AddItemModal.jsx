@@ -4,11 +4,16 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 function AddItemModal({ isOpen, onClose, onAddItem }) {
   const defaultValues = {
     name: "",
-    link: "",
+    imageUrl: "",
     weather: "",
   };
 
-  const { values, setValues, handleChange } = useForm(defaultValues);
+  const { values, setValues, handleChange, isFormValid } =
+    useForm(defaultValues);
+
+  const requiredFields = ["name", "imageUrl", "weather"];
+
+  const formIsValid = isFormValid(requiredFields);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -37,6 +42,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
+      isFormValid={formIsValid}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
@@ -56,9 +62,9 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
           type="url"
           className="modal__input"
           id="imageURL"
-          name="link"
+          name="imageUrl"
           placeholder="Image URL"
-          value={values.link}
+          value={values.imageUrl}
           onChange={handleChange}
         />
       </label>
@@ -71,7 +77,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
             name="weather"
             value="hot"
             className="modal__radio-input"
-            values="Hot"
+            checked={values.weather === "hot"}
             onChange={handleChange}
             onClick={handleRadioDeselect}
             required
@@ -85,7 +91,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
             name="weather"
             value="warm"
             className="modal__radio-input"
-            values="Warm"
+            checked={values.weather === "warm"}
             onChange={handleChange}
             onClick={handleRadioDeselect}
             required
@@ -99,7 +105,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
             name="weather"
             value="cold"
             className="modal__radio-input"
-            values="Cold"
+            checked={values.weather === "cold"}
             onChange={handleChange}
             onClick={handleRadioDeselect}
             required

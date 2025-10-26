@@ -8,7 +8,13 @@ function useForm(defaultValues) {
     setValues({ ...values, [name]: value });
   }
 
-  return { values, setValues, handleChange };
+  const isFormValid = (requiredFields = []) => {
+    return requiredFields.every(
+      (field) => values[field] && values[field].trim() !== ""
+    );
+  };
+
+  return { values, setValues, handleChange, isFormValid };
 }
 
 export default useForm;

@@ -101,6 +101,23 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+    },
+    {
+      "name": "ASSC Hoodie",
+      "weather": "cold",
+      "_id": 17
+    },
+    {
+      "name": "ASSC Hoodie",
+      "imageUrl": "https://unsplash.com/photos/person-in-red-and-white-hoodie-standing-on-bridge-during-daytime-CVF1ydNDHdw",
+      "weather": "cold",
+      "_id": 18
+    },
+    {
+      "name": "ASSC Hoodie",
+      "imageUrl": "https://unsplash.com/photos/person-in-red-and-white-hoodie-standing-on-bridge-during-daytime-CVF1ydNDHdw",
+      "weather": "cold",
+      "_id": 19
     }
   ]
 }

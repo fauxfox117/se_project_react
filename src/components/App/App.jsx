@@ -9,7 +9,7 @@ import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
-import { getItems } from "../../utils/api.js";
+import { getItems, addItem } from "../../utils/api.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
 
@@ -40,11 +40,18 @@ function App() {
   const onAddItem = (inputValues) => {
     const newCardData = {
       name: inputValues.name,
-      link: inputValues.link,
+      imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
     };
     setClothingItems([...clothingItems, newCardData]);
     closeActiveModal();
+
+    addItem(newCardData)
+      .then((data) => {
+        setClothingItems((prevItems) => [...clothingItems, data]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const handleAddClick = () => {
