@@ -9,7 +9,7 @@ import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import Footer from "../Footer/Footer.jsx";
-import { getItems, addItem } from "../../utils/api.js";
+import { getItems, addItem, removeItem } from "../../utils/api.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
 
@@ -43,15 +43,24 @@ function App() {
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
     };
-    setClothingItems([...clothingItems, newCardData]);
-    closeActiveModal();
+    // setClothingItems([...clothingItems, newCardData]);
+    // closeActiveModal();
 
     addItem(newCardData)
       .then((data) => {
-        setClothingItems((prevItems) => [...clothingItems, data]);
+        setClothingItems(() => [data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
+  };
+
+  const onDeleteItem = (id) => {
+    removeItem(id).then(() => {
+      setClothingItems((prevItems) =>
+        prevItems.filter((item) => item._id !== id)
+      );
+      closeActiveModal();
+    });
   };
 
   const handleAddClick = () => {
@@ -81,7 +90,7 @@ function App() {
 
     getItems()
       .then((data) => {
-        setClothingItems(data);
+        setClothingItems([...data].reverse());
       })
       .catch(console.error);
   }, []);
@@ -120,6 +129,7 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  // onDeleteItem={onDeleteItem}
                 />
               }
             />
@@ -130,6 +140,7 @@ function App() {
                   clothingItems={clothingItems}
                   handleCardClick={handleCardClick}
                   handleAddClick={handleAddClick}
+                  // onDeleteItem={onDeleteItem}
                 />
               }
             />

@@ -24,14 +24,11 @@
 
 .clothes-section__items {
   display: grid;
-  grid-template-columns: repeat(
-    auto-fit,
-    325px
-  ); /* Match the actual card width */
+  grid-template-columns: repeat(auto-fit, 325px);
   margin: 0;
   padding: 0;
   list-style: none;
-  gap: 20px;
+  gap: 17px;
   justify-content: center;
 }
 
