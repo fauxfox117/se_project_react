@@ -43,8 +43,6 @@ function App() {
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
     };
-    // setClothingItems([...clothingItems, newCardData]);
-    // closeActiveModal();
 
     addItem(newCardData)
       .then((data) => {
@@ -158,6 +156,7 @@ function App() {
           card={selectedCard}
           onClose={closeActiveModal}
           handleOverlayClose={handleOverlayClose}
+          onDeleteItem={onDeleteItem}
         ></ItemModal>
       </div>
     </CurrentTempUnitContext.Provider>

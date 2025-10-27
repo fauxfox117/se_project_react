@@ -31,12 +31,6 @@
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Dress.png?etag=1f9cd32a311ab139cab43494883720bf"
     },
     {
-      "_id": 5,
-      "name": "Hoodie",
-      "weather": "cold",
-      "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/Hoodie.png?etag=5f52451d0958ccb1016c78a45603a4e8"
-    },
-    {
       "_id": 6,
       "name": "Jacket",
       "weather": "cold",
@@ -101,35 +95,6 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
-    },
-    {
-      "name": "ASSC Hoodie",
-      "weather": "cold",
-      "_id": 17
-    },
-    {
-      "name": "ASSC Hoodie",
-      "imageUrl": "https://unsplash.com/photos/person-in-red-and-white-hoodie-standing-on-bridge-during-daytime-CVF1ydNDHdw",
-      "weather": "cold",
-      "_id": 18
-    },
-    {
-      "name": "ASSC Hoodie",
-      "imageUrl": "https://unsplash.com/photos/person-in-red-and-white-hoodie-standing-on-bridge-during-daytime-CVF1ydNDHdw",
-      "weather": "cold",
-      "_id": 19
-    },
-    {
-      "name": "ASSC",
-      "imageUrl": "https://unsplash.com/photos/person-in-red-and-white-hoodie-standing-on-bridge-during-daytime-CVF1ydNDHdw",
-      "weather": "cold",
-      "_id": 20
-    },
-    {
-      "name": "test",
-      "imageUrl": "https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=300&h=300",
-      "weather": "cold",
-      "_id": 21
     }
   ]
 }
