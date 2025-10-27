@@ -2,10 +2,8 @@
   display: flex;
   position: relative;
   margin: auto;
-
   border-radius: 8px;
   box-sizing: border-box;
-
   flex-direction: column;
 }
 

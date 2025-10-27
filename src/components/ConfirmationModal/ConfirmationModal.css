@@ -19,7 +19,7 @@
   color: #000;
 }
 
-.confirm-modal__controls {
+.confirm-modal__buttons {
   display: flex;
   justify-content: center;
   flex-direction: column;

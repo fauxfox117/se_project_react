@@ -1,12 +1,6 @@
 import "./ConfirmationModal.css";
 
-function ConfirmationModal({
-  isOpen,
-  onClose,
-  onConfirm,
-  handleOverlayClose,
-  title = "Are you sure?",
-}) {
+function ConfirmationModal({ isOpen, onClose, onConfirm, handleOverlayClose }) {
   if (!isOpen) return null;
 
   return (
@@ -14,8 +8,7 @@ function ConfirmationModal({
       className={`modal ${isOpen ? "modal__opened" : ""}`}
       onClick={handleOverlayClose}
     >
-      <div
-        className="confirm-modal__content">
+      <div className="confirm-modal__content">
         <button
           onClick={onClose}
           className="confirm-modal__image_close-btn"
@@ -26,7 +19,7 @@ function ConfirmationModal({
           <br />
           This action is irreversible.
         </h2>
-        <div className="confirm-modal__controls">
+        <div className="confirm-modal__buttons">
           <button
             type="button"
             className="confirm-modal__btn confirm-modal__btn_confirm"
