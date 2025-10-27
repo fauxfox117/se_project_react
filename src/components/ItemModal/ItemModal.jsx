@@ -1,5 +1,6 @@
 import "./ItemModal.css";
-import { removeItem } from "../../utils/api.js";
+import { useState } from "react";
+import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
 
 function ItemModal({
   card,
@@ -8,14 +9,31 @@ function ItemModal({
   handleOverlayClose,
   onDeleteItem,
 }) {
+  const [showConfirm, setShowConfirm] = useState(false);
+
   const handleDelete = () => {
+    setShowConfirm(true);
+  };
+
+  const handleConfirmDelete = () => {
     onDeleteItem(card._id);
+    setShowConfirm(false);
     onClose();
   };
 
+  const handleCancelDelete = () => {
+    setShowConfirm(false);
+  };
+
+  function handleConfirmOverlayClose(evt) {
+    if (evt.target === evt.currentTarget) {
+      handleCancelDelete();
+    }
+  }
+
   return (
     <div
-      className={`modal ${isOpen ? "modal__opened" : ""}`}
+      className={`modal ${isOpen && !showConfirm ? "modal__opened" : ""}`}
       onClick={handleOverlayClose}
     >
       <div className="modal__content modal__content_type_image">
@@ -37,6 +55,12 @@ function ItemModal({
           </button>
         </div>
       </div>
+      <ConfirmationModal
+        isOpen={showConfirm}
+        onClose={handleCancelDelete}
+        onConfirm={handleConfirmDelete}
+        handleOverlayClose={handleConfirmOverlayClose}
+      />
     </div>
   );
 }

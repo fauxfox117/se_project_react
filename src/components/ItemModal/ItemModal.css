@@ -13,12 +13,11 @@
   position: absolute;
   top: 20px;
   right: 28px;
-  background-image: url(/src/assets/close.png);
-  background-color: transparent;
+  background: no-repeat transparent url(/src/assets/close.png);
   border: none;
   cursor: pointer;
-  width: 14px;
-  height: 14px;
+  width: 20px;
+  height: 20px;
   padding: 0;
 }
 

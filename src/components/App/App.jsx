@@ -49,7 +49,9 @@ function App() {
         setClothingItems(() => [data, ...clothingItems]);
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error adding item:", error);
+      });
   };
 
   const onDeleteItem = (id) => {
@@ -127,7 +129,7 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   clothingItems={clothingItems}
-                  // onDeleteItem={onDeleteItem}
+                  onDeleteItem={onDeleteItem}
                 />
               }
             />
