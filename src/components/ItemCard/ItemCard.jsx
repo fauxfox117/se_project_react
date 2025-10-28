@@ -6,7 +6,6 @@ function ItemCard({ item, onCardClick }) {
   };
 
   const handleImageError = (e) => {
-    console.log("Image failed to load:", item.imageUrl);
     e.target.src = "https://via.placeholder.com/325x283?text=Image+Not+Found"; // Fallback image
   };
 

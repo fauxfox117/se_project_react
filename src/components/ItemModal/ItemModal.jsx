@@ -16,9 +16,12 @@ function ItemModal({
   };
 
   const handleConfirmDelete = () => {
-    onDeleteItem(card._id);
-    setShowConfirm(false);
-    onClose();
+    onDeleteItem(card._id)
+      .then(() => {
+        setShowConfirm(false);
+        onClose();
+      })
+      .catch(console.error);
   };
 
   const handleCancelDelete = () => {
@@ -42,7 +45,11 @@ function ItemModal({
           className="modal__image_close-btn"
           type="button"
         ></button>
-        <img src={card.imageUrl} alt="{card.name}" className="modal__image" />
+        <img
+          src={card.imageUrl}
+          alt={card.name || " "}
+          className="modal__image"
+        />
         <div className="modal__footer">
           <h2 className="modal__caption">{card.name}</h2>
           <p className="modal__weather"> Weather: {card.weather}</p>

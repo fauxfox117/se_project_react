@@ -1,7 +1,7 @@
 import useForm from "../../hooks/useForm.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function AddItemModal({ isOpen, onClose, onAddItem }) {
+function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
   const defaultValues = {
     name: "",
     imageUrl: "",
@@ -17,8 +17,9 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
 
   function handleSubmit(evt) {
     evt.preventDefault();
-    onAddItem(values);
-    setValues(defaultValues);
+    onAddItem(values).then(() => {
+      setValues(defaultValues);
+    });
   }
 
   const handleRadioDeselect = (evt) => {
@@ -43,6 +44,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isFormValid={formIsValid}
+      handleOverlayClose={handleOverlayClose}
     >
       <label htmlFor="name" className="modal__label">
         Name{" "}
@@ -54,6 +56,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
           placeholder="Name"
           value={values.name}
           onChange={handleChange}
+          required
         />
       </label>
       <label htmlFor="imageURL" className="modal__label">
@@ -66,6 +69,7 @@ function AddItemModal({ isOpen, onClose, onAddItem }) {
           placeholder="Image URL"
           value={values.imageUrl}
           onChange={handleChange}
+          required
         />
       </label>
       <fieldset className="modal__radio-btns">

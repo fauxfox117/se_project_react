@@ -22,20 +22,14 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
-  const [temperatureUnit, setTemperatureUnit] = useState("F");
+  const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
 
   useEffect(() => {
-    document.addEventListener("keydown", handleEscape);
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, []);
-
-  const handleEscape = (evt) => {
-    if (evt.key === "Escape") {
-      setActiveModal("");
-    }
-  };
+    if (!activeModal) return;
+    const onEsc = (e) => e.key === "Escape" && closeActiveModal();
+    document.addEventListener("keydown", onEsc);
+    return () => document.removeEventListener("keydown", onEsc);
+  }, [activeModal]);
 
   const onAddItem = (inputValues) => {
     const newCardData = {
@@ -55,12 +49,14 @@ function App() {
   };
 
   const onDeleteItem = (id) => {
-    removeItem(id).then(() => {
-      setClothingItems((prevItems) =>
-        prevItems.filter((item) => item._id !== id)
-      );
-      closeActiveModal();
-    });
+    removeItem(id)
+      .then(() => {
+        setClothingItems((prevItems) =>
+          prevItems.filter((item) => item._id !== id)
+        );
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const handleAddClick = () => {
@@ -101,12 +97,12 @@ function App() {
   };
 
   const handleToggleChange = (evt) => {
-    setTemperatureUnit(temperatureUnit === "F" ? "C" : "F");
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
   return (
     <CurrentTempUnitContext.Provider
-      value={{ temperatureUnit, handleToggleChange }}
+      value={{ currentTemperatureUnit, handleToggleChange }}
     >
       <div className="app">
         <div className="app__content">
@@ -115,10 +111,10 @@ function App() {
             location={weatherData?.city || "Loading..."}
             weatherTemp={
               weatherData?.temp
-                ? convertTemperature(weatherData.temp, temperatureUnit)
+                ? convertTemperature(weatherData.temp, currentTemperatureUnit)
                 : ""
             }
-            temperatureUnit={temperatureUnit}
+            currentTemperatureUnit={currentTemperatureUnit}
             onToggleChange={handleToggleChange}
           />
           <Routes>

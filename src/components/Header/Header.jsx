@@ -8,7 +8,7 @@ function Header({
   handleAddClick,
   location,
   weatherTemp,
-  temperatureUnit,
+  currentTemperatureUnit,
   onToggleChange,
 }) {
   const username = "Terrance Tegegne";
@@ -26,10 +26,10 @@ function Header({
         {`${currentDate}, ${location || "Loading..."}`}
       </p>
       <div className="header__temperature">
-        {weatherTemp !== undefined && `${weatherTemp}°${temperatureUnit}`}
+        {weatherTemp !== undefined && `${weatherTemp}°${currentTemperatureUnit}`}
       </div>
       <ToggleSwitch
-        isOn={temperatureUnit === "C"}
+        isOn={currentTemperatureUnit === "C"}
         handleToggleChange={onToggleChange}
       />
       <button
