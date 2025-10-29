@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
-import { coordinates, apiKey } from "../../utils/constants.js";
 
+import { apiKey } from "../../utils/constants.js";
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Profile from "../Profile/Profile.jsx";
@@ -12,6 +12,7 @@ import Footer from "../Footer/Footer.jsx";
 import { getItems, addItem, removeItem } from "../../utils/api.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
+import { getCurrentLocation } from "../../utils/geolocation.js";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
@@ -76,20 +77,40 @@ function App() {
     if (evt.target === evt.currentTarget) closeActiveModal();
   };
 
+  // In your App function, update the useEffect that fetches weather:
   useEffect(() => {
-    getWeather(coordinates, apiKey)
-      .then((data) => {
-        const filteredData = filterWeatherData(data);
-        setWeatherData(filteredData);
+    getCurrentLocation()
+      .then((coordinates) => {
+        return getWeather(coordinates, apiKey);
       })
-      .catch(console.error);
-
+      .then((data) => {
+        const processedData = filterWeatherData(data);
+        setWeatherData(processedData);
+      })
+      .catch((error) => {
+        console.error("Error getting location or weather:", error);
+        // Fallback to default coordinates if geolocation fails
+        const defaultCoordinates = { latitude: 40.7128, longitude: -74.006 }; // NYC
+        return getWeather(defaultCoordinates, apiKey)
+          .then((data) => {
+            const processedData = filterWeatherData(data);
+            setWeatherData(processedData);
+          })
+          .catch(console.error);
+      });
     getItems()
       .then((data) => {
         setClothingItems([...data].reverse());
       })
       .catch(console.error);
   }, []);
+  // useEffect(() => {
+  //   getWeather(coordinates, apiKey)
+  //     .then((data) => {
+  //       const filteredData = filterWeatherData(data);
+  //       setWeatherData(filteredData);
+  //     })
+  //     .catch(console.error);
 
   const convertTemperature = (temp, unit) => {
     // Just return the temperature in the correct unit
