@@ -23,7 +23,7 @@ function Main({ weatherData, handleCardClick, clothingItems, onDeleteItem }) {
             .map((item) => {
               return (
                 <ItemCard
-                  key={item._id}
+                  key={item.id}
                   item={item}
                   onCardClick={handleCardClick}
                   onDeleteItem={onDeleteItem}

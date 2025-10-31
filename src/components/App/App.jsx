@@ -41,7 +41,7 @@ function App() {
 
     addItem(newCardData)
       .then((data) => {
-        setClothingItems(() => [data, ...clothingItems]);
+        setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
       })
       .catch((error) => {
@@ -50,14 +50,17 @@ function App() {
   };
 
   const onDeleteItem = (id) => {
-    removeItem(id)
+    return removeItem(id)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item._id !== id)
+          prevItems.filter((item) => item.id !== id)
         );
         closeActiveModal();
       })
-      .catch(console.error);
+      .catch((error) => {
+        console.error("Error deleting item:", error);
+        throw error;
+      });
   };
 
   const handleAddClick = () => {

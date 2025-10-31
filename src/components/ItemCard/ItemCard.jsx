@@ -10,7 +10,7 @@ function ItemCard({ item, onCardClick }) {
   };
 
   // const handleDelete = (evt) => {
-  //   onDeleteItem(item._id);
+  //   onDeleteItem(item.id);
   // };
 
   return (

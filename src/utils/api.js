@@ -19,8 +19,12 @@ export const addItem = ({ name, imageUrl, weather }) => {
 };
 
 export const removeItem = (itemId) => {
+  console.log("Deleting item with ID:", itemId);
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
     headers,
-  }).then(handleServerResponse);
+  }).then((res) => {
+    console.log("Delete response status:", res.status);
+    return handleServerResponse(res);
+  });
 };

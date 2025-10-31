@@ -16,10 +16,9 @@ function ItemModal({
   };
 
   const handleConfirmDelete = () => {
-    onDeleteItem(card._id)
+    onDeleteItem(card.id)
       .then(() => {
         setShowConfirm(false);
-        onClose();
       })
       .catch(console.error);
   };
