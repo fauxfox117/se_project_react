@@ -14,7 +14,11 @@ function useForm(defaultValues) {
     );
   };
 
-  return { values, setValues, handleChange, isFormValid };
+  const resetForm = () => {
+    setValues(defaultValues);
+  };
+
+  return { values, setValues, handleChange, isFormValid, resetForm };
 }
 
 export default useForm;

@@ -39,7 +39,7 @@ function App() {
       weather: inputValues.weather,
     };
 
-    addItem(newCardData)
+    return addItem(newCardData)
       .then((data) => {
         setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
@@ -80,7 +80,6 @@ function App() {
     if (evt.target === evt.currentTarget) closeActiveModal();
   };
 
-  // In your App function, update the useEffect that fetches weather:
   useEffect(() => {
     getCurrentLocation()
       .then((coordinates) => {
@@ -107,16 +106,8 @@ function App() {
       })
       .catch(console.error);
   }, []);
-  // useEffect(() => {
-  //   getWeather(coordinates, apiKey)
-  //     .then((data) => {
-  //       const filteredData = filterWeatherData(data);
-  //       setWeatherData(filteredData);
-  //     })
-  //     .catch(console.error);
 
   const convertTemperature = (temp, unit) => {
-    // Just return the temperature in the correct unit
     return Math.round(temp[unit]);
   };
 

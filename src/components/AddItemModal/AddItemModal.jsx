@@ -1,5 +1,6 @@
 import useForm from "../../hooks/useForm.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import { useEffect } from "react";
 
 function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
   const defaultValues = {
@@ -8,17 +9,22 @@ function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
     weather: "",
   };
 
-  const { values, setValues, handleChange, isFormValid } =
+  const { values, setValues, handleChange, isFormValid, resetForm } =
     useForm(defaultValues);
 
   const requiredFields = ["name", "imageUrl", "weather"];
 
   const formIsValid = isFormValid(requiredFields);
+  useEffect(() => {
+    if (!isOpen) {
+      resetForm();
+    }
+  }, [isOpen]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
     onAddItem(values).then(() => {
-      setValues(defaultValues);
+      resetForm();
     });
   }
 
