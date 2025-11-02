@@ -92,7 +92,10 @@ function App() {
       .catch((error) => {
         console.error("Error getting location or weather:", error);
         // Fallback to default coordinates if geolocation fails
-        const defaultCoordinates = { latitude: 40.7128, longitude: -74.006 }; // NYC
+        const defaultCoordinates = {
+          latitude: 34.85075,
+          longitude: -82.398956,
+        }; // GVL,SC
         return getWeather(defaultCoordinates, apiKey)
           .then((data) => {
             const processedData = filterWeatherData(data);

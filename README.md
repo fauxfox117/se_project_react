@@ -12,7 +12,7 @@ WTWR helps users decide what to wear by combining real-time weather data with th
 - **Dynamic Clothing Recommendations**: Suggests appropriate clothing based on current temperature
 - **Personal Wardrobe Management**: Add, view, and delete clothing items
 - **Temperature Unit Toggle**: Switch between Fahrenheit and Celsius
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Responsive Design**: Optimized for desktop
 - **Confirmation Modals**: Safe deletion with user confirmation
 - **Weather-based Filtering**: Displays relevant clothing for hot, warm, or cold weather
 
@@ -47,36 +47,41 @@ src/
 ## Installation & Setup
 
 ### Prerequisites
+
 - Node.js (v14 or higher)
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/fauxfox17/se_project_react.git
 cd se_project_react
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the JSON Server (for backend):
+
 ```bash
 json-server --watch db.json --port 3001
 ```
 
 4. Start the development server:
+
 ```bash
 npm run dev
 ```
 
-
 ## API Configuration
 
 ### Weather API
+
 The app uses OpenWeatherMap API. You'll need to:
 
 1. Sign up at [OpenWeatherMap](https://openweathermap.org/api)
@@ -89,6 +94,7 @@ export const APIkey = "your-openweathermap-api-key";
 ```
 
 ### Local Database
+
 The app uses JSON Server for development. The database structure:
 
 ```json
@@ -116,21 +122,18 @@ The app uses JSON Server for development. The database structure:
 ## Weather Categories
 
 - **Hot** (≥86°F / 30°C): Shorts, t-shirts, light clothing
-- **Warm** (66-85°F / 19-29°C): Light sweaters, jeans, moderate clothing  
+- **Warm** (66-85°F / 19-29°C): Light sweaters, jeans, moderate clothing
 - **Cold** (<66°F / <19°C): Hoodies, coats, warm clothing
-
 
 ## Links
 
 - [Figma Design](https://www.figma.com/file/DTojSwldenF9UPKQZd6RRb/Sprint-10%3A-WTWR)
-- [Project Video] ()
+- [Project Video] (https://drive.google.com/file/d/1LSGBDcNurMH8fK1v_-OLMJ74ZA-7pHJF/view?usp=sharing)
 - [API Documentation](https://openweathermap.org/api)
-
 
 ## Acknowledgments
 
 - Weather data provided by [OpenWeatherMap](https://openweathermap.org/)
-- Design inspiration from Practicum by Yandex
 - Icons and images from various sources
 
 ---
