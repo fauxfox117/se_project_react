@@ -9,6 +9,7 @@ import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import SignUpModal from "../SignUpModal/SignUpModal.jsx";
+import SignInModal from "../SignInModal/SignInModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import { getItems, addItem, removeItem } from "../../utils/api.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
