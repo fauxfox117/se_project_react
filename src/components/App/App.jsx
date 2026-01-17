@@ -8,6 +8,7 @@ import Main from "../Main/Main.jsx";
 import Profile from "../Profile/Profile.jsx";
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
+import SignUpModal from "../SignUpModal/SignUpModal.jsx";
 import Footer from "../Footer/Footer.jsx";
 import { getItems, addItem, removeItem } from "../../utils/api.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
@@ -174,6 +175,13 @@ function App() {
           handleOverlayClose={handleOverlayClose}
           onDeleteItem={onDeleteItem}
         ></ItemModal>
+        <SignUpModal
+          isOpen={activeModal === "sign-up"}
+          onClose={closeActiveModal}
+          handleOverlayClose={handleOverlayClose}
+          // onSubmit={onSubmit}
+          // isFormValid={isFormValid}
+        ></SignUpModal>
       </div>
     </CurrentTempUnitContext.Provider>
   );
