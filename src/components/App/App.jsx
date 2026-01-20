@@ -11,9 +11,23 @@ import ItemModal from "../ItemModal/ItemModal.jsx";
 import SignUpModal from "../SignUpModal/SignUpModal.jsx";
 import SignInModal from "../SignInModal/SignInModal.jsx";
 import Footer from "../Footer/Footer.jsx";
-import { getItems, addItem, removeItem } from "../../utils/api.js";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import {
+  getItems,
+  addItem,
+  removeItem,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api.js";
+import {
+  signup,
+  signin,
+  getCurrentUser,
+  updateUserData,
+} from "../../utils/auth.js";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
+import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 import { getCurrentLocation } from "../../utils/geolocation.js";
 
 function App() {
@@ -26,6 +40,29 @@ function App() {
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Check token on mount
+  useEffect(() => {
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      getCurrentUser(token)
+        .then((user) => {
+          setCurrentUser(user);
+          setIsLoggedIn(true);
+        })
+        .catch((error) => {
+          console.error("Error checking token:", error);
+          localStorage.removeItem("jwt");
+          setIsLoggedIn(false);
+        })
+        .finally(() => setIsLoading(false));
+    } else {
+      setIsLoading(false);
+    }
+  }, []);
 
   useEffect(() => {
     if (!activeModal) return;
@@ -34,14 +71,81 @@ function App() {
     return () => document.removeEventListener("keydown", onEsc);
   }, [activeModal]);
 
+  const handleSignUp = (data) => {
+    return signup(data)
+      .then(() => {
+        // Auto-sign in after successful signup
+        return signin({ email: data.email, password: data.password });
+      })
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        return getCurrentUser(res.token);
+      })
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      });
+  };
+
+  const handleSignIn = (data) => {
+    return signin(data)
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
+        return getCurrentUser(res.token);
+      })
+      .then((user) => {
+        setCurrentUser(user);
+        setIsLoggedIn(true);
+        closeActiveModal();
+      });
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setCurrentUser(null);
+    setIsLoggedIn(false);
+    closeActiveModal();
+  };
+
+  const handleUpdateUser = (data) => {
+    const token = localStorage.getItem("jwt");
+    return updateUserData(token, data).then((updatedUser) => {
+      setCurrentUser(updatedUser);
+    });
+  };
+
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item)),
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item)),
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   const onAddItem = (inputValues) => {
+    const token = localStorage.getItem("jwt");
     const newCardData = {
       name: inputValues.name,
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
     };
 
-    return addItem(newCardData)
+    return addItem(newCardData, token)
       .then((data) => {
         setClothingItems((prevItems) => [data, ...prevItems]);
         closeActiveModal();
@@ -52,10 +156,11 @@ function App() {
   };
 
   const onDeleteItem = (id) => {
-    return removeItem(id)
+    const token = localStorage.getItem("jwt");
+    return removeItem(id, token)
       .then(() => {
         setClothingItems((prevItems) =>
-          prevItems.filter((item) => item.id !== id)
+          prevItems.filter((item) => item._id !== id),
         );
         closeActiveModal();
       })
@@ -120,70 +225,96 @@ function App() {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <CurrentTempUnitContext.Provider
       value={{ currentTemperatureUnit, handleToggleChange }}
     >
-      <div className="app">
-        <div className="app__content">
-          <Header
-            handleAddClick={handleAddClick}
-            location={weatherData?.city || "Loading..."}
-            weatherTemp={
-              weatherData?.temp
-                ? convertTemperature(weatherData.temp, currentTemperatureUnit)
-                : ""
-            }
-            currentTemperatureUnit={currentTemperatureUnit}
-            onToggleChange={handleToggleChange}
-          />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Main
-                  weatherData={weatherData}
-                  handleCardClick={handleCardClick}
-                  clothingItems={clothingItems}
-                  onDeleteItem={onDeleteItem}
-                />
+      <CurrentUserContext.Provider value={currentUser}>
+        <div className="app">
+          <div className="app__content">
+            <Header
+              handleAddClick={handleAddClick}
+              location={weatherData?.city || "Loading..."}
+              weatherTemp={
+                weatherData?.temp
+                  ? convertTemperature(weatherData.temp, currentTemperatureUnit)
+                  : ""
               }
+              currentTemperatureUnit={currentTemperatureUnit}
+              onToggleChange={handleToggleChange}
+              isLoggedIn={isLoggedIn}
+              currentUser={currentUser}
+              onSignUpClick={() => setActiveModal("sign-up")}
+              onSignInClick={() => setActiveModal("sign-in")}
+              onLogout={handleLogout}
             />
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  clothingItems={clothingItems}
-                  handleCardClick={handleCardClick}
-                  handleAddClick={handleAddClick}
-                  // onDeleteItem={onDeleteItem}
-                />
-              }
-            />
-          </Routes>
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <Main
+                    weatherData={weatherData}
+                    handleCardClick={handleCardClick}
+                    clothingItems={clothingItems}
+                    onDeleteItem={onDeleteItem}
+                    isLoggedIn={isLoggedIn}
+                    currentUser={currentUser}
+                    onCardLike={handleCardLike}
+                  />
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      clothingItems={clothingItems}
+                      handleCardClick={handleCardClick}
+                      handleAddClick={handleAddClick}
+                      isLoggedIn={isLoggedIn}
+                      currentUser={currentUser}
+                      onLogout={handleLogout}
+                      onUpdateUser={handleUpdateUser}
+                    />
+                  </ProtectedRoute>
+                }
+              />
+            </Routes>
+          </div>
+          <Footer />
+          <AddItemModal
+            isOpen={activeModal === "add-garment"}
+            onClose={closeActiveModal}
+            handleOverlayClose={handleOverlayClose}
+            onAddItem={onAddItem}
+          ></AddItemModal>
+          <ItemModal
+            isOpen={activeModal === "preview"}
+            card={selectedCard}
+            onClose={closeActiveModal}
+            handleOverlayClose={handleOverlayClose}
+            onDeleteItem={onDeleteItem}
+            isLoggedIn={isLoggedIn}
+            currentUser={currentUser}
+          ></ItemModal>
+          <SignUpModal
+            isOpen={activeModal === "sign-up"}
+            onClose={closeActiveModal}
+            handleOverlayClose={handleOverlayClose}
+            onSignUp={handleSignUp}
+          ></SignUpModal>
+          <SignInModal
+            isOpen={activeModal === "sign-in"}
+            onClose={closeActiveModal}
+            handleOverlayClose={handleOverlayClose}
+            onSignIn={handleSignIn}
+          ></SignInModal>
         </div>
-        <Footer />
-        <AddItemModal
-          isOpen={activeModal === "add-garment"}
-          onClose={closeActiveModal}
-          handleOverlayClose={handleOverlayClose}
-          onAddItem={onAddItem}
-        ></AddItemModal>
-        <ItemModal
-          isOpen={activeModal === "preview"}
-          card={selectedCard}
-          onClose={closeActiveModal}
-          handleOverlayClose={handleOverlayClose}
-          onDeleteItem={onDeleteItem}
-        ></ItemModal>
-        <SignUpModal
-          isOpen={activeModal === "sign-up"}
-          onClose={closeActiveModal}
-          handleOverlayClose={handleOverlayClose}
-          // onSubmit={onSubmit}
-          // isFormValid={isFormValid}
-        ></SignUpModal>
-      </div>
+      </CurrentUserContext.Provider>
     </CurrentTempUnitContext.Provider>
   );
 }

@@ -10,13 +10,19 @@ function Header({
   weatherTemp,
   currentTemperatureUnit,
   onToggleChange,
+  isLoggedIn,
+  currentUser,
+  onSignUpClick,
+  onSignInClick,
+  onLogout,
 }) {
-  const username = "Terrance Tegegne";
-  const avatar = avatarDefault;
   const currentDate = new Date().toLocaleString("default", {
     month: "long",
     day: "numeric",
   });
+
+  // Create placeholder avatar with first letter of name
+
   return (
     <header className="header">
       <NavLink to="/" className="header__logo-btn" type="button">
@@ -26,7 +32,8 @@ function Header({
         {`${currentDate}, ${location || "Loading..."}`}
       </p>
       <div className="header__temperature">
-        {weatherTemp !== undefined && `${weatherTemp}°${currentTemperatureUnit}`}
+        {weatherTemp !== undefined &&
+          `${weatherTemp}°${currentTemperatureUnit}`}
       </div>
       <ToggleSwitch
         isOn={currentTemperatureUnit === "C"}
@@ -36,19 +43,46 @@ function Header({
         onClick={handleAddClick}
         type="button"
         className="header__add-clothes-btn"
+        disabled={!isLoggedIn}
       >
         + Add Clothes
       </button>
-      <NavLink to="/profile" type="button" className="header__nav-link">
-        <div className="header__user-container">
-          <p className="header__username">{username}</p>
-          <img
-            src={avatar || avatarDefault}
-            alt="Terrence Tegegne"
-            className="header__avatar"
-          />
+
+      {!isLoggedIn ? (
+        <div className="header__auth-buttons">
+          <button
+            onClick={onSignUpClick}
+            type="button"
+            className="header__auth-btn header__sign-up-btn"
+          >
+            Sign Up
+          </button>
+          <button
+            onClick={onSignInClick}
+            type="button"
+            className="header__auth-btn header__sign-in-btn"
+          >
+            Log In
+          </button>
         </div>
-      </NavLink>
+      ) : (
+        <NavLink to="/profile" type="button" className="header__nav-link">
+          <div className="header__user-container">
+            <p className="header__username">{currentUser?.name}</p>
+            {currentUser?.avatar ? (
+              <img
+                src={currentUser.avatar}
+                alt={currentUser.name}
+                className="header__avatar"
+              />
+            ) : (
+              <div className="header__avatar header__avatar_placeholder">
+                {currentUser?.name}
+              </div>
+            )}
+          </div>
+        </NavLink>
+      )}
     </header>
   );
 }

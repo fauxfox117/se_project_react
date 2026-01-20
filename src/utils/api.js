@@ -10,21 +10,47 @@ export const getItems = () => {
   return fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
 };
 
-export const addItem = ({ name, imageUrl, weather }) => {
+export const addItem = ({ name, imageUrl, weather }, token) => {
+  const authHeaders = token
+    ? { ...headers, authorization: `Bearer ${token}` }
+    : headers;
   return fetch(`${baseUrl}/items`, {
     method: "POST",
-    headers,
+    headers: authHeaders,
     body: JSON.stringify({ name, imageUrl, weather }),
   }).then(handleServerResponse);
 };
 
-export const removeItem = (itemId) => {
+export const removeItem = (itemId, token) => {
   console.log("Deleting item with ID:", itemId);
+  const authHeaders = token
+    ? { ...headers, authorization: `Bearer ${token}` }
+    : headers;
   return fetch(`${baseUrl}/items/${itemId}`, {
     method: "DELETE",
-    headers,
+    headers: authHeaders,
   }).then((res) => {
     console.log("Delete response status:", res.status);
     return handleServerResponse(res);
   });
+};
+
+export const addCardLike = (id, token) => {
+  const authHeaders = token
+    ? { ...headers, authorization: `Bearer ${token}` }
+    : headers;
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "PUT",
+    headers: authHeaders,
+  }).then(handleServerResponse);
+};
+
+export const removeCardLike = (id, token) => {
+  const authHeaders = token
+    ? { ...headers, authorization: `Bearer ${token}` }
+    : headers;
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: "DELETE",
+    headers: authHeaders,
+  }).then(handleServerResponse);
 };

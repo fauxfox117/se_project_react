@@ -19,9 +19,51 @@
   color: #00000099;
 }
 
+.card__image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
 .card__image {
   width: 325px;
   height: 328px;
   border-radius: 19px;
   border: 1px solid #0000004d;
+  object-fit: cover;
+}
+
+.card__like-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: white;
+  border: 2px solid #7c5295;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #7c5295;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card__like-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.card__like-btn_active {
+  background-color: #7c5295;
+  color: white;
+}
+
+.card__like-btn_active:hover {
+  background-color: #6a4680;
+}
+
+.card__like-btn_hidden {
+  display: none;
 }

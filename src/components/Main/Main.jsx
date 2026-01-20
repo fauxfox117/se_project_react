@@ -4,7 +4,15 @@ import ItemCard from "../ItemCard/ItemCard.jsx";
 import { useContext } from "react";
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
 
-function Main({ weatherData, handleCardClick, clothingItems, onDeleteItem }) {
+function Main({
+  weatherData,
+  handleCardClick,
+  clothingItems,
+  onDeleteItem,
+  isLoggedIn,
+  currentUser,
+  onCardLike,
+}) {
   const { currentTemperatureUnit } = useContext(CurrentTempUnitContext);
   return (
     <main>
@@ -12,7 +20,9 @@ function Main({ weatherData, handleCardClick, clothingItems, onDeleteItem }) {
       <section className="cards">
         <p className="cards__text">
           Today is{" "}
-          {currentTemperatureUnit === "F" ? weatherData.temp.F : weatherData.temp.C}{" "}
+          {currentTemperatureUnit === "F"
+            ? weatherData.temp.F
+            : weatherData.temp.C}{" "}
           &deg; {currentTemperatureUnit} You may want to wear:
         </p>
         <ul className="cards__list">
@@ -23,10 +33,13 @@ function Main({ weatherData, handleCardClick, clothingItems, onDeleteItem }) {
             .map((item) => {
               return (
                 <ItemCard
-                  key={item.id}
+                  key={item._id}
                   item={item}
                   onCardClick={handleCardClick}
                   onDeleteItem={onDeleteItem}
+                  onCardLike={onCardLike}
+                  isLoggedIn={isLoggedIn}
+                  currentUser={currentUser}
                 />
               );
             })}

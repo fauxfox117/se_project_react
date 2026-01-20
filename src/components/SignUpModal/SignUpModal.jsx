@@ -1,16 +1,41 @@
 import "./SignUpModal.css";
+import { useState } from "react";
+import useForm from "../../hooks/useForm.jsx";
 
 function SignUpModal({
-  children,
-  buttonText,
   isOpen,
   onClose,
   handleOverlayClose,
-  onSubmit,
+  onSignUp,
   isFormValid = true,
 }) {
+  const [error, setError] = useState("");
+  const { values, handleChange, resetForm } = useForm({
+    email: "",
+    password: "",
+    name: "",
+    avatar: "",
+  });
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setError("");
+    onSignUp(values)
+      .then(() => {
+        resetForm();
+      })
+      .catch((err) => {
+        setError(
+          typeof err === "string" ? err : "An error occurred during sign up",
+        );
+      });
+  };
+
   return (
-    <div className={`modal modal__opened`} onClick={handleOverlayClose}>
+    <div
+      className={`modal ${isOpen ? "modal__opened" : ""}`}
+      onClick={handleOverlayClose}
+    >
       <div className="modal__content">
         <h2 className="modal__title">Sign Up</h2>
         <button
@@ -19,35 +44,60 @@ function SignUpModal({
           type="button"
         ></button>
 
-        <form className="modal__form" onSubmit={onSubmit}>
-          {children}
-          <label htmlFor="name" className="modal__label">
-            Name{" "}
+        <form className="modal__form" onSubmit={handleSubmit}>
+          <label htmlFor="email" className="modal__label">
+            Email{" "}
             <input
               type="email"
               className="modal__input"
               id="email"
               name="email"
-              placeholder="email"
-              // value={values.email}
-              //   onChange={handleChange}
+              placeholder="Email"
+              value={values.email}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          <label htmlFor="password" className="modal__label">
+            Password{" "}
+            <input
+              type="password"
+              className="modal__input"
+              id="password"
+              name="password"
+              placeholder="Password"
+              value={values.password}
+              onChange={handleChange}
               required
             />
           </label>
           <label htmlFor="name" className="modal__label">
             Name{" "}
             <input
-              type="password"
+              type="text"
               className="modal__input"
-              id="password"
-              name="password"
-              placeholder="password"
-              // value={values.password}
-              //   onChange={handleChange}
+              id="name"
+              name="name"
+              placeholder="Name"
+              value={values.name}
+              onChange={handleChange}
               required
             />
           </label>
-
+          <label htmlFor="avatar" className="modal__label">
+            Avatar URL{" "}
+            <input
+              type="url"
+              className="modal__input"
+              id="avatar"
+              name="avatar"
+              placeholder="Avatar URL"
+              value={values.avatar}
+              onChange={handleChange}
+              required
+            />
+          </label>
+          {error && <p className="modal__error">{error}</p>}
           <button
             className={`modal__submit-btn ${
               !isFormValid ? "modal__submit-btn_disabled" : ""

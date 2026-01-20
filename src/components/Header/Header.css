@@ -59,4 +59,30 @@
 .header__avatar {
   height: 40px;
   width: 40px;
+  border-radius: 50%;
+}
+
+.header__auth-buttons {
+  cursor: pointer;
+  margin: 0 20px 0 0;
+  font-size: 20px;
+  font-weight: 700;
+  border: none;
+  background: transparent;
+}
+
+.header__sign-up-btn {
+  cursor: pointer;
+  border-style: none;
+  background: transparent;
+  font-weight: 700;
+  font-style: bold;
+}
+
+.header__sign-in-btn {
+  cursor: pointer;
+  border-style: none;
+  background: transparent;
+  font-weight: 700;
+  font-style: bold;
 }

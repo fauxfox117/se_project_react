@@ -75,37 +75,6 @@
   margin: 0 0 12px 0;
 }
 
-.modal__radio-btns {
-  display: flex;
-  flex-direction: column;
-  border: none;
-  padding: 0;
-  align-items: flex-start;
-  width: 100%;
-}
-
-.modal__radio-input {
-  font-size: 16px;
-  line-height: 20px;
-}
-
-.modal__label.modal__label_type_radio {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  width: auto;
-  margin: 0 0 8px 0;
-  gap: 8px;
-  font-size: 16px;
-  line-height: 20px;
-  font-weight: 700;
-  color: #00000080;
-}
-
-.modal__label.modal__label_type_radio:has(input:checked) {
-  cursor: pointer;
-  color: #000000;
-}
 
 .modal__submit-btn {
   background-color: #000000;
