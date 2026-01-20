@@ -39,14 +39,15 @@ function Header({
         isOn={currentTemperatureUnit === "C"}
         handleToggleChange={onToggleChange}
       />
-      <button
-        onClick={handleAddClick}
-        type="button"
-        className="header__add-clothes-btn"
-        disabled={!isLoggedIn}
-      >
-        + Add Clothes
-      </button>
+      {isLoggedIn && (
+        <button
+          onClick={handleAddClick}
+          type="button"
+          className="header__add-clothes-btn"
+        >
+          + Add Clothes
+        </button>
+      )}
 
       {!isLoggedIn ? (
         <div className="header__auth-buttons">
