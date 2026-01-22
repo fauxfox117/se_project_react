@@ -36,7 +36,7 @@
   background-color: #ffffff;
   position: relative;
   box-sizing: border-box;
-  padding: 28px 28px 36px;
+
   max-width: 496px;
   width: 100%;
   border-radius: 20px;
@@ -74,7 +74,6 @@
   font-size: 16px;
   margin: 0 0 12px 0;
 }
-
 
 .modal__submit-btn {
   background-color: #000000;

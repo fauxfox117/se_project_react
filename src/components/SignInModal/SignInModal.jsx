@@ -44,7 +44,7 @@ function SignInModal({
 
         <form className="modal__form" onSubmit={handleSubmit}>
           <label htmlFor="email" className="modal__label">
-            Email{" "}
+            Email*{" "}
             <input
               type="email"
               className="modal__input"

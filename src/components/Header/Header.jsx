@@ -22,6 +22,9 @@ function Header({
   });
 
   // Create placeholder avatar with first letter of name
+  const getInitial = (name) => {
+    return name ? name.charAt(0).toUpperCase() : "?";
+  };
 
   return (
     <header className="header">
@@ -78,7 +81,7 @@ function Header({
               />
             ) : (
               <div className="header__avatar header__avatar_placeholder">
-                {currentUser?.name}
+                {getInitial(currentUser?.name)}
               </div>
             )}
           </div>

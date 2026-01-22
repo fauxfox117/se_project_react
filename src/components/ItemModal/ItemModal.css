@@ -24,13 +24,13 @@
 }
 
 .modal__image {
-  /* max-width: 80vh;
-  max-height: 80vh; */
-  object-fit: cover;
+  max-width: 80vh;
+  max-height: 80vh;
+  object-fit: fill;
   width: 100%;
   display: block;
-  border-radius: 8px;
   margin: 0;
+  padding: 0;
 }
 
 .modal__footer {
