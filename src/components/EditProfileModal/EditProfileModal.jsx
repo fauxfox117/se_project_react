@@ -1,7 +1,16 @@
+// Styles
 import "./EditProfileModal.css";
+
+// React
 import { useState, useContext, useEffect } from "react";
-import useForm from "../../hooks/useForm.jsx";
+
+// Components
 import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+
+// Hooks
+import useForm from "../../hooks/useForm.jsx";
+
+// Contexts
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
 function EditProfileModal({
@@ -30,17 +39,13 @@ function EditProfileModal({
   const handleSubmit = (e) => {
     e.preventDefault();
     setError("");
-    onUpdateUser(values)
-      .then(() => {
-        resetForm();
-      })
-      .catch((err) => {
-        setError(
-          typeof err === "string"
-            ? err
-            : "An error occurred while updating profile",
-        );
-      });
+    onUpdateUser(values).catch((err) => {
+      setError(
+        typeof err === "string"
+          ? err
+          : "An error occurred while updating profile",
+      );
+    });
   };
 
   return (

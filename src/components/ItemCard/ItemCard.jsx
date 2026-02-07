@@ -2,9 +2,8 @@ import "./ItemCard.css";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
-function ItemCard({ item, onCardClick, onCardLike, isLoggedIn, currentUser }) {
-  const currentUserFromContext = useContext(CurrentUserContext);
-  const user = currentUser || currentUserFromContext;
+function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
+  const currentUser = useContext(CurrentUserContext);
 
   const handleCardClick = () => {
     onCardClick(item);
@@ -17,7 +16,9 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn, currentUser }) {
   // Check if the item was liked by the current user
   // The likes array should be an array of ids
   const isLiked =
-    item.likes && user && item.likes.some((id) => id === user._id);
+    item.likes &&
+    currentUser &&
+    item.likes.some((id) => id === currentUser._id);
 
   // Create a variable which you then set in `className` for the like button
   const itemLikeButtonClassName = `card__like-btn ${
@@ -46,7 +47,7 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn, currentUser }) {
             className={itemLikeButtonClassName}
             type="button"
           >
-            ♡
+            
           </button>
         )}
       </div>

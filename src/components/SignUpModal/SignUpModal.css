@@ -129,3 +129,25 @@
 .modal__submit-btn_disabled {
   background-color: #0000004d;
 }
+
+.modal__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.modal__secondary-btn {
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.modal__secondary-btn:hover {
+  opacity: 0.6;
+}

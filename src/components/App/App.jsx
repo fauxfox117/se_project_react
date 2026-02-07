@@ -1,17 +1,32 @@
+// React
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
+
+// Styles
 import "./App.css";
 
-import { apiKey } from "../../utils/constants.js";
+// Components
 import Header from "../Header/Header.jsx";
 import Main from "../Main/Main.jsx";
 import Profile from "../Profile/Profile.jsx";
+import Footer from "../Footer/Footer.jsx";
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+
+// Modals
 import AddItemModal from "../AddItemModal/AddItemModal.jsx";
 import ItemModal from "../ItemModal/ItemModal.jsx";
 import SignUpModal from "../SignUpModal/SignUpModal.jsx";
 import SignInModal from "../SignInModal/SignInModal.jsx";
-import Footer from "../Footer/Footer.jsx";
-import ProtectedRoute from "../ProtectedRoute/ProtectedRoute.jsx";
+import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
+
+// Contexts
+import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
+import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
+
+// Utils
+import { apiKey } from "../../utils/constants.js";
+import { getCurrentLocation } from "../../utils/geolocation.js";
+import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
 import {
   getItems,
   addItem,
@@ -25,10 +40,6 @@ import {
   getCurrentUser,
   updateUserData,
 } from "../../utils/auth.js";
-import { getWeather, filterWeatherData } from "../../utils/weatherApi.js";
-import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
-import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
-import { getCurrentLocation } from "../../utils/geolocation.js";
 
 function App() {
   const [clothingItems, setClothingItems] = useState([]);
@@ -72,20 +83,9 @@ function App() {
   }, [activeModal]);
 
   const handleSignUp = (data) => {
-    return signup(data)
-      .then(() => {
-        // Auto-sign in after successful signup
-        return signin({ email: data.email, password: data.password });
-      })
-      .then((res) => {
-        localStorage.setItem("jwt", res.token);
-        return getCurrentUser(res.token);
-      })
-      .then((user) => {
-        setCurrentUser(user);
-        setIsLoggedIn(true);
-        closeActiveModal();
-      });
+    return signup(data).then(() => {
+      return handleSignIn({ email: data.email, password: data.password });
+    });
   };
 
   const handleSignIn = (data) => {
@@ -177,6 +177,10 @@ function App() {
   const handleCardClick = (card) => {
     setActiveModal("preview");
     setSelectedCard(card);
+  };
+
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
   };
 
   const closeActiveModal = () => {
@@ -279,6 +283,8 @@ function App() {
                       currentUser={currentUser}
                       onLogout={handleLogout}
                       onUpdateUser={handleUpdateUser}
+                      onCardLike={handleCardLike}
+                      onEditProfileClick={handleEditProfileClick}
                     />
                   </ProtectedRoute>
                 }
@@ -306,13 +312,21 @@ function App() {
             onClose={closeActiveModal}
             handleOverlayClose={handleOverlayClose}
             onSignUp={handleSignUp}
+            onSwitchModal={() => setActiveModal("sign-in")}
           ></SignUpModal>
           <SignInModal
             isOpen={activeModal === "sign-in"}
             onClose={closeActiveModal}
             handleOverlayClose={handleOverlayClose}
             onSignIn={handleSignIn}
+            onSwitchModal={() => setActiveModal("sign-up")}
           ></SignInModal>
+          <EditProfileModal
+            isOpen={activeModal === "edit-profile"}
+            onClose={closeActiveModal}
+            handleOverlayClose={handleOverlayClose}
+            onUpdateUser={handleUpdateUser}
+          />
         </div>
       </CurrentUserContext.Provider>
     </CurrentTempUnitContext.Provider>

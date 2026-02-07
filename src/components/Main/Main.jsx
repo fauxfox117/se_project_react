@@ -39,7 +39,6 @@ function Main({
                   onDeleteItem={onDeleteItem}
                   onCardLike={onCardLike}
                   isLoggedIn={isLoggedIn}
-                  currentUser={currentUser}
                 />
               );
             })}

@@ -7,6 +7,7 @@ function SignUpModal({
   onClose,
   handleOverlayClose,
   onSignUp,
+  onSwitchModal,
   isFormValid = true,
 }) {
   const [error, setError] = useState("");
@@ -98,15 +99,24 @@ function SignUpModal({
             />
           </label>
           {error && <p className="modal__error">{error}</p>}
-          <button
-            className={`modal__submit-btn ${
-              !isFormValid ? "modal__submit-btn_disabled" : ""
-            }`}
-            type="submit"
-            disabled={!isFormValid}
-          >
-            Sign Up!
-          </button>
+          <div className="modal__buttons">
+            <button
+              className={`modal__submit-btn ${
+                !isFormValid ? "modal__submit-btn_disabled" : ""
+              }`}
+              type="submit"
+              disabled={!isFormValid}
+            >
+              Sign Up!
+            </button>
+            <button
+              className="modal__secondary-btn"
+              type="button"
+              onClick={onSwitchModal}
+            >
+              or Sign In
+            </button>
+          </div>
         </form>
       </div>
     </div>

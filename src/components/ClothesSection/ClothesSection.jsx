@@ -3,7 +3,13 @@ import { useContext } from "react";
 import ItemCard from "../ItemCard/ItemCard.jsx";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
-function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
+function ClothesSection({
+  clothingItems,
+  handleCardClick,
+  handleAddClick,
+  isLoggedIn,
+  onCardLike,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   // Filter to show only items added by the current user
@@ -31,6 +37,8 @@ function ClothesSection({ clothingItems, handleCardClick, handleAddClick }) {
                 key={item._id}
                 item={item}
                 onCardClick={handleCardClick}
+                isLoggedIn={isLoggedIn}
+                onCardLike={onCardLike}
               />
             );
           })}
