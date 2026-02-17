@@ -130,13 +130,6 @@
   background-color: #0000004d;
 }
 
-.modal__buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-}
-
 .modal__secondary-btn {
   background: none;
   border: none;
@@ -145,7 +138,7 @@
   font-weight: 500;
   cursor: pointer;
   padding: 0;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .modal__secondary-btn:hover {

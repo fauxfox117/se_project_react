@@ -2,7 +2,7 @@ import useForm from "../../hooks/useForm.jsx";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useEffect } from "react";
 
-function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
+function AddItemModal({ isOpen, onClose, onAddItem }) {
   const defaultValues = {
     name: "",
     imageUrl: "",
@@ -44,20 +44,19 @@ function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
 
   return (
     <ModalWithForm
+      name="add-item"
       title="New Garment"
       buttonText="Add Garment"
       onClose={onClose}
       isOpen={isOpen}
       onSubmit={handleSubmit}
       isFormValid={formIsValid}
-      handleOverlayClose={handleOverlayClose}
     >
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         Name{" "}
         <input
           type="text"
           className="modal__input"
-          id="name"
           name="name"
           placeholder="Name"
           value={values.name}
@@ -65,12 +64,11 @@ function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
           required
         />
       </label>
-      <label htmlFor="imageURL" className="modal__label">
+      <label className="modal__label">
         Image{" "}
         <input
           type="url"
           className="modal__input"
-          id="imageURL"
           name="imageUrl"
           placeholder="Image URL"
           value={values.imageUrl}
@@ -80,9 +78,8 @@ function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
       </label>
       <fieldset className="modal__radio-btns">
         <legend className="modal__legend">Select the weather type:</legend>
-        <label htmlFor="hot" className="modal__label modal__label_type_radio">
+        <label className="modal__label modal__label_type_radio">
           <input
-            id="hot"
             type="radio"
             name="weather"
             value="hot"
@@ -94,9 +91,8 @@ function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
           />
           Hot
         </label>
-        <label htmlFor="warm" className="modal__label modal__label_type_radio">
+        <label className="modal__label modal__label_type_radio">
           <input
-            id="warm"
             type="radio"
             name="weather"
             value="warm"
@@ -108,9 +104,8 @@ function AddItemModal({ isOpen, onClose, onAddItem, handleOverlayClose }) {
           />
           Warm
         </label>
-        <label htmlFor="cold" className="modal__label modal__label_type_radio">
+        <label className="modal__label modal__label_type_radio">
           <input
-            id="cold"
             type="radio"
             name="weather"
             value="cold"

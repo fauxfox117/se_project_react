@@ -1,4 +1,5 @@
 import "./ModalWithForm.css";
+import Modal from "../Modal/Modal.jsx";
 
 function ModalWithForm({
   children,
@@ -6,26 +7,19 @@ function ModalWithForm({
   title,
   isOpen,
   onClose,
-  handleOverlayClose,
   onSubmit,
   isFormValid = true,
+  secondaryButtonText,
+  onSecondaryButtonClick,
+  name,
 }) {
   return (
-    <div
-      className={`modal ${isOpen ? "modal__opened" : ""}`}
-      onClick={handleOverlayClose}
-    >
-      <div className="modal__content">
-        <h2 className="modal__title">{title}</h2>
-        <button
-          onClick={onClose}
-          className="modal__close-btn"
-          type="button"
-        ></button>
+    <Modal name={name} onClose={onClose} isOpen={isOpen}>
+      <h2 className="modal__title">{title}</h2>
+      <form className="modal__form" onSubmit={onSubmit}>
+        {children}
 
-        <form className="modal__form" onSubmit={onSubmit}>
-          {children}
-
+        <div className="modal__buttons">
           <button
             className={`modal__submit-btn ${
               !isFormValid ? "modal__submit-btn_disabled" : ""
@@ -33,11 +27,20 @@ function ModalWithForm({
             type="submit"
             disabled={!isFormValid}
           >
-            {buttonText}{" "}
+            {buttonText}
           </button>
-        </form>
-      </div>
-    </div>
+          {secondaryButtonText && (
+            <button
+              className="modal__secondary-btn"
+              type="button"
+              onClick={onSecondaryButtonClick}
+            >
+              {secondaryButtonText}
+            </button>
+          )}
+        </div>
+      </form>
+    </Modal>
   );
 }
 

@@ -1,42 +1,33 @@
 import "./ConfirmationModal.css";
+import Modal from "../Modal/Modal.jsx";
 
-function ConfirmationModal({ isOpen, onClose, onConfirm, handleOverlayClose }) {
+function ConfirmationModal({ isOpen, onClose, onConfirm }) {
   if (!isOpen) return null;
 
   return (
-    <div
-      className={`modal ${isOpen ? "modal__opened" : ""}`}
-      onClick={handleOverlayClose}
-    >
-      <div className="confirm-modal__content">
+    <Modal name="confirm" isOpen={isOpen} onClose={onClose}>
+      <h2 className="confirm-modal__title">
+        Are you sure you want to delete this item?
+        <br />
+        This action is irreversible.
+      </h2>
+      <div className="confirm-modal__buttons">
         <button
-          onClick={onClose}
-          className="confirm-modal__image_close-btn"
           type="button"
-        ></button>
-        <h2 className="confirm-modal__title">
-          Are you sure you want to delete this item?
-          <br />
-          This action is irreversible.
-        </h2>
-        <div className="confirm-modal__buttons">
-          <button
-            type="button"
-            className="confirm-modal__btn confirm-modal__btn_confirm"
-            onClick={onConfirm}
-          >
-            Yes, delete item
-          </button>
-          <button
-            type="button"
-            className="confirm-modal__btn confirm-modal__btn_cancel"
-            onClick={onClose}
-          >
-            Cancel
-          </button>
-        </div>
+          className="confirm-modal__btn confirm-modal__btn_confirm"
+          onClick={onConfirm}
+        >
+          Yes, delete item
+        </button>
+        <button
+          type="button"
+          className="confirm-modal__btn confirm-modal__btn_cancel"
+          onClick={onClose}
+        >
+          Cancel
+        </button>
       </div>
-    </div>
+    </Modal>
   );
 }
 

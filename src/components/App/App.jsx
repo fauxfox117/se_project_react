@@ -75,13 +75,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {
-    if (!activeModal) return;
-    const onEsc = (e) => e.key === "Escape" && closeActiveModal();
-    document.addEventListener("keydown", onEsc);
-    return () => document.removeEventListener("keydown", onEsc);
-  }, [activeModal]);
-
   const handleSignUp = (data) => {
     return signup(data).then(() => {
       return handleSignIn({ email: data.email, password: data.password });
@@ -187,10 +180,6 @@ function App() {
     setActiveModal("");
   };
 
-  const handleOverlayClose = (evt) => {
-    if (evt.target === evt.currentTarget) closeActiveModal();
-  };
-
   useEffect(() => {
     getCurrentLocation()
       .then((coordinates) => {
@@ -251,7 +240,6 @@ function App() {
               currentTemperatureUnit={currentTemperatureUnit}
               onToggleChange={handleToggleChange}
               isLoggedIn={isLoggedIn}
-              currentUser={currentUser}
               onSignUpClick={() => setActiveModal("sign-up")}
               onSignInClick={() => setActiveModal("sign-in")}
               onLogout={handleLogout}
@@ -266,7 +254,6 @@ function App() {
                     clothingItems={clothingItems}
                     onDeleteItem={onDeleteItem}
                     isLoggedIn={isLoggedIn}
-                    currentUser={currentUser}
                     onCardLike={handleCardLike}
                   />
                 }
@@ -280,7 +267,6 @@ function App() {
                       handleCardClick={handleCardClick}
                       handleAddClick={handleAddClick}
                       isLoggedIn={isLoggedIn}
-                      currentUser={currentUser}
                       onLogout={handleLogout}
                       onUpdateUser={handleUpdateUser}
                       onCardLike={handleCardLike}
@@ -295,36 +281,30 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
-            handleOverlayClose={handleOverlayClose}
             onAddItem={onAddItem}
           ></AddItemModal>
           <ItemModal
             isOpen={activeModal === "preview"}
             card={selectedCard}
             onClose={closeActiveModal}
-            handleOverlayClose={handleOverlayClose}
             onDeleteItem={onDeleteItem}
             isLoggedIn={isLoggedIn}
-            currentUser={currentUser}
           ></ItemModal>
           <SignUpModal
             isOpen={activeModal === "sign-up"}
             onClose={closeActiveModal}
-            handleOverlayClose={handleOverlayClose}
             onSignUp={handleSignUp}
             onSwitchModal={() => setActiveModal("sign-in")}
           ></SignUpModal>
           <SignInModal
             isOpen={activeModal === "sign-in"}
             onClose={closeActiveModal}
-            handleOverlayClose={handleOverlayClose}
             onSignIn={handleSignIn}
             onSwitchModal={() => setActiveModal("sign-up")}
           ></SignInModal>
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}
             onClose={closeActiveModal}
-            handleOverlayClose={handleOverlayClose}
             onUpdateUser={handleUpdateUser}
           />
         </div>

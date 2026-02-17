@@ -7,7 +7,6 @@ function Profile({
   handleCardClick,
   handleAddClick,
   onLogout,
-  currentUser,
   onUpdateUser,
   isLoggedIn,
   onCardLike,

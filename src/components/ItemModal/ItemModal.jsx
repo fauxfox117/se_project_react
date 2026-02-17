@@ -1,13 +1,13 @@
 import "./ItemModal.css";
 import { useState, useContext } from "react";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
+import Modal from "../Modal/Modal.jsx";
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
 function ItemModal({
   card,
   isOpen,
   onClose,
-  handleOverlayClose,
   onDeleteItem,
 }) {
   const [showConfirm, setShowConfirm] = useState(false);
@@ -37,49 +37,37 @@ function ItemModal({
     setShowConfirm(false);
   };
 
-  function handleConfirmOverlayClose(evt) {
-    if (evt.target === evt.currentTarget) {
-      handleCancelDelete();
-    }
-  }
-
-  return (
-    <div
-      className={`modal ${isOpen && !showConfirm ? "modal__opened" : ""}`}
-      onClick={handleOverlayClose}
-    >
-      <div className="modal__content modal__content_type_image">
-        <button
-          onClick={onClose}
-          className="modal__image_close-btn"
-          type="button"
-        ></button>
-        <img
-          src={card.imageUrl}
-          alt={card.name || " "}
-          className="modal__image"
-        />
-        <div className="modal__footer">
-          <h2 className="modal__caption">{card.name}</h2>
-          <p className="modal__weather"> Weather: {card.weather}</p>
-          {isOwn && (
-            <button
-              className={itemDeleteButtonClassName}
-              onClick={handleDelete}
-              type="button"
-            >
-              Delete item
-            </button>
-          )}
-        </div>
-      </div>
+  if (showConfirm) {
+    return (
       <ConfirmationModal
         isOpen={showConfirm}
         onClose={handleCancelDelete}
         onConfirm={handleConfirmDelete}
-        handleOverlayClose={handleConfirmOverlayClose}
       />
-    </div>
+    );
+  }
+
+  return (
+    <Modal name="preview" isOpen={isOpen} onClose={onClose}>
+      <img
+        src={card.imageUrl}
+        alt={card.name || " "}
+        className="modal__image"
+      />
+      <div className="modal__footer">
+        <h2 className="modal__caption">{card.name}</h2>
+        <p className="modal__weather"> Weather: {card.weather}</p>
+        {isOwn && (
+          <button
+            className={itemDeleteButtonClassName}
+            onClick={handleDelete}
+            type="button"
+          >
+            Delete item
+          </button>
+        )}
+      </div>
+    </Modal>
   );
 }
 

@@ -13,12 +13,7 @@ import useForm from "../../hooks/useForm.jsx";
 // Contexts
 import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
 
-function EditProfileModal({
-  isOpen,
-  onClose,
-  handleOverlayClose,
-  onUpdateUser,
-}) {
+function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
   const [error, setError] = useState("");
   const currentUser = useContext(CurrentUserContext);
   const { values, handleChange, setValues, resetForm } = useForm({
@@ -50,19 +45,18 @@ function EditProfileModal({
 
   return (
     <ModalWithForm
+      name="edit-profile"
       isOpen={isOpen}
       onClose={onClose}
-      handleOverlayClose={handleOverlayClose}
       title="Edit Profile"
       buttonText="Save Changes"
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         Name{" "}
         <input
           type="text"
           className="modal__input"
-          id="name"
           name="name"
           placeholder="Name"
           value={values.name}
@@ -70,12 +64,11 @@ function EditProfileModal({
           required
         />
       </label>
-      <label htmlFor="avatar" className="modal__label">
+      <label className="modal__label">
         Avatar URL{" "}
         <input
           type="url"
           className="modal__input"
-          id="avatar"
           name="avatar"
           placeholder="Avatar URL"
           value={values.avatar}

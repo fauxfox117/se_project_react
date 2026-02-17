@@ -1,11 +1,18 @@
+// Styles
 import "./SignInModal.css";
+
+// React
 import { useState } from "react";
+
+// Components
+import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+
+// Hooks
 import useForm from "../../hooks/useForm.jsx";
 
 function SignInModal({
   isOpen,
   onClose,
-  handleOverlayClose,
   onSignIn,
   onSwitchModal,
   isFormValid = true,
@@ -31,67 +38,43 @@ function SignInModal({
   };
 
   return (
-    <div
-      className={`modal ${isOpen ? "modal__opened" : ""}`}
-      onClick={handleOverlayClose}
+    <ModalWithForm
+      name="signin"
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Sign In"
+      buttonText="Sign In"
+      onSubmit={handleSubmit}
+      isFormValid={isFormValid}
+      secondaryButtonText="or Sign Up"
+      onSecondaryButtonClick={onSwitchModal}
     >
-      <div className="modal__content">
-        <h2 className="modal__title">Sign In</h2>
-        <button
-          onClick={onClose}
-          className="modal__close-btn"
-          type="button"
-        ></button>
-
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <label htmlFor="email" className="modal__label">
-            Email*{" "}
-            <input
-              type="email"
-              className="modal__input"
-              id="email"
-              name="email"
-              placeholder="Email"
-              value={values.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="password" className="modal__label">
-            Password{" "}
-            <input
-              type="password"
-              className="modal__input"
-              id="password"
-              name="password"
-              placeholder="Password"
-              value={values.password}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          {error && <p className="modal__error">{error}</p>}
-          <div className="modal__buttons">
-            <button
-              className={`modal__submit-btn ${
-                !isFormValid ? "modal__submit-btn_disabled" : ""
-              }`}
-              type="submit"
-              disabled={!isFormValid}
-            >
-              Sign In
-            </button>
-            <button
-              className="modal__secondary-btn"
-              type="button"
-              onClick={onSwitchModal}
-            >
-              or Sign Up
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <label className="modal__label">
+        Email*{" "}
+        <input
+          type="email"
+          className="modal__input"
+          name="email"
+          placeholder="Email"
+          value={values.email}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label className="modal__label">
+        Password{" "}
+        <input
+          type="password"
+          className="modal__input"
+          name="password"
+          placeholder="Password"
+          value={values.password}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      {error && <p className="modal__error">{error}</p>}
+    </ModalWithForm>
   );
 }
 

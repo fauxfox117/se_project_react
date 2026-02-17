@@ -1,11 +1,18 @@
+// Styles
 import "./SignUpModal.css";
+
+// React
 import { useState } from "react";
+
+// Components
+import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
+
+// Hooks
 import useForm from "../../hooks/useForm.jsx";
 
 function SignUpModal({
   isOpen,
   onClose,
-  handleOverlayClose,
   onSignUp,
   onSwitchModal,
   isFormValid = true,
@@ -33,93 +40,67 @@ function SignUpModal({
   };
 
   return (
-    <div
-      className={`modal ${isOpen ? "modal__opened" : ""}`}
-      onClick={handleOverlayClose}
+    <ModalWithForm
+      name="signup"
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Sign Up"
+      buttonText="Sign Up!"
+      onSubmit={handleSubmit}
+      isFormValid={isFormValid}
+      secondaryButtonText="or Sign In"
+      onSecondaryButtonClick={onSwitchModal}
     >
-      <div className="modal__content">
-        <h2 className="modal__title">Sign Up</h2>
-        <button
-          onClick={onClose}
-          className="modal__close-btn"
-          type="button"
-        ></button>
-
-        <form className="modal__form" onSubmit={handleSubmit}>
-          <label htmlFor="email" className="modal__label">
-            Email{" "}
-            <input
-              type="email"
-              className="modal__input"
-              id="email"
-              name="email"
-              placeholder="Email"
-              value={values.email}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="password" className="modal__label">
-            Password{" "}
-            <input
-              type="password"
-              className="modal__input"
-              id="password"
-              name="password"
-              placeholder="Password"
-              value={values.password}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="name" className="modal__label">
-            Name{" "}
-            <input
-              type="text"
-              className="modal__input"
-              id="name"
-              name="name"
-              placeholder="Name"
-              value={values.name}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          <label htmlFor="avatar" className="modal__label">
-            Avatar URL{" "}
-            <input
-              type="url"
-              className="modal__input"
-              id="avatar"
-              name="avatar"
-              placeholder="Avatar URL"
-              value={values.avatar}
-              onChange={handleChange}
-              required
-            />
-          </label>
-          {error && <p className="modal__error">{error}</p>}
-          <div className="modal__buttons">
-            <button
-              className={`modal__submit-btn ${
-                !isFormValid ? "modal__submit-btn_disabled" : ""
-              }`}
-              type="submit"
-              disabled={!isFormValid}
-            >
-              Sign Up!
-            </button>
-            <button
-              className="modal__secondary-btn"
-              type="button"
-              onClick={onSwitchModal}
-            >
-              or Sign In
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
+      <label className="modal__label">
+        Email{" "}
+        <input
+          type="email"
+          className="modal__input"
+          name="email"
+          placeholder="Email"
+          value={values.email}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label className="modal__label">
+        Password{" "}
+        <input
+          type="password"
+          className="modal__input"
+          name="password"
+          placeholder="Password"
+          value={values.password}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label className="modal__label">
+        Name{" "}
+        <input
+          type="text"
+          className="modal__input"
+          name="name"
+          placeholder="Name"
+          value={values.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label className="modal__label">
+        Avatar URL{" "}
+        <input
+          type="url"
+          className="modal__input"
+          name="avatar"
+          placeholder="Avatar URL"
+          value={values.avatar}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      {error && <p className="modal__error">{error}</p>}
+    </ModalWithForm>
   );
 }
 
