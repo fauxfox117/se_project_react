@@ -38,29 +38,20 @@
   right: 12px;
   width: 40px;
   height: 40px;
-  border-radius: 50%;
-  background-color: white;
-  border: 2px solid #7c5295;
-  font-size: 20px;
+  border-style: none;
+  background-color: transparent;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #7c5295;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.card__like-btn:hover {
-  background-color: #f0f0f0;
-}
+/* .card__like-btn:hover {
+} */
 
 .card__like-btn_active {
-  background-color: #7c5295;
-  color: white;
-}
-
-.card__like-btn_active:hover {
-  background-color: #6a4680;
+  background-color: transparent;
 }
 
 .card__like-btn_hidden {
