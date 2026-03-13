@@ -9,6 +9,7 @@ WTWR helps users decide what to wear by combining real-time weather data with th
 ## Features
 
 ### Authentication & User Management
+
 - **User Registration**: Sign up with name, avatar URL, email, and password
 - **User Login**: Sign in with email and password (JWT token-based)
 - **Session Persistence**: Automatic login on return visits using stored tokens
@@ -17,6 +18,7 @@ WTWR helps users decide what to wear by combining real-time weather data with th
 - **Sign Out**: Clear session and return to home page
 
 ### Clothing & Weather
+
 - **Geolocation-based Weather**: Automatically detects user location for accurate weather data
 - **Dynamic Clothing Recommendations**: Suggests appropriate clothing based on current temperature
 - **Personal Wardrobe Management**: Add, view, and delete your own clothing items
@@ -26,6 +28,7 @@ WTWR helps users decide what to wear by combining real-time weather data with th
 - **Weather-based Filtering**: Displays relevant clothing for hot, warm, or cold weather
 
 ### UI/UX
+
 - **Responsive Design**: Optimized for desktop
 - **Confirmation Modals**: Safe deletion with user confirmation
 - **Avatar Placeholders**: Shows first letter of name when no avatar provided
@@ -78,7 +81,7 @@ src/
 This React app connects to an Express.js backend with MongoDB database:
 
 - **Backend Repository**: [se_project_express](https://github.com/fauxfox117/se_project_express)
-- **API Base URL**: `http://localhost:3001`
+- **API Base URL**: `http://api.sbolin.crabdance.com`
 - **Database**: MongoDB (`wtwr_db`)
 - **Authentication**: JWT tokens with 7-day expiration
 - **Security**: bcrypt password hashing (10 rounds)
@@ -86,12 +89,14 @@ This React app connects to an Express.js backend with MongoDB database:
 ### API Endpoints
 
 #### Authentication
+
 - `POST /signup` - Register new user (name, avatar, email, password)
 - `POST /signin` - Login user (returns JWT token)
 - `GET /users/me` - Get current user data (requires Authorization header)
 - `PATCH /users/me` - Update user profile (name, avatar)
 
 #### Clothing Items
+
 - `GET /items` - Get all clothing items
 - `POST /items` - Create new clothing item (requires auth)
 - `DELETE /items/:id` - Delete clothing item (owner only)
@@ -190,13 +195,15 @@ export const baseUrl = "http://localhost:3001";
 ## Usage
 
 ### For Unauthenticated Users
+
 1. **Allow Location Access**: Grant permission for geolocation to get accurate weather
 2. **View Weather**: See current temperature and location
 3. **Browse All Items**: View all clothing items from all users
 4. **Sign Up/Sign In**: Create account or login to access full features
 
 ### For Authenticated Users
-1. **Profile Management**: 
+
+1. **Profile Management**:
    - View your personal wardrobe on `/profile` page
    - Edit your name and avatar URL
    - Sign out when done
