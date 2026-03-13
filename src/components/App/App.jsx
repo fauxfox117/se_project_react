@@ -21,7 +21,7 @@ import EditProfileModal from "../EditProfileModal/EditProfileModal.jsx";
 
 // Contexts
 import CurrentTempUnitContext from "../../contexts/CurrentTempUnit.jsx";
-import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.jsx";
 
 // Utils
 import { apiKey } from "../../utils/constants.js";

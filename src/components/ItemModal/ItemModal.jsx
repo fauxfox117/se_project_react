@@ -2,14 +2,9 @@ import "./ItemModal.css";
 import { useState, useContext } from "react";
 import ConfirmationModal from "../ConfirmationModal/ConfirmationModal.jsx";
 import Modal from "../Modal/Modal.jsx";
-import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.jsx";
 
-function ItemModal({
-  card,
-  isOpen,
-  onClose,
-  onDeleteItem,
-}) {
+function ItemModal({ card, isOpen, onClose, onDeleteItem }) {
   const [showConfirm, setShowConfirm] = useState(false);
   const currentUser = useContext(CurrentUserContext);
 

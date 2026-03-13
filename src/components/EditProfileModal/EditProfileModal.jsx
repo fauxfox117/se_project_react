@@ -11,7 +11,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm.jsx";
 import useForm from "../../hooks/useForm.jsx";
 
 // Contexts
-import CurrentUserContext from "../../contexts/CurrentUserContext.jsx";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext.jsx";
 
 function EditProfileModal({ isOpen, onClose, onUpdateUser }) {
   const [error, setError] = useState("");

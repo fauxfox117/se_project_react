@@ -1,6 +1,9 @@
 import { handleServerResponse } from "./api.js";
 
-const baseUrl = "http://localhost:3001";
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://sbolin.crabdance.com"
+    : "http://localhost:3001";
 
 const headers = { "Content-Type": "application/json" };
 
