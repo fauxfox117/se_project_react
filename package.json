@@ -2,7 +2,7 @@
   "name": "se_project_react",
   "private": true,
   "version": "0.0.0",
-  "homepage": "http://sbolin.crabdance.com",
+  "homepage": "https://sbolin.crabdance.com",
   "type": "module",
   "scripts": {
     "dev": "vite --open",

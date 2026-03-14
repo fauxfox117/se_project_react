@@ -2,7 +2,7 @@ import { handleServerResponse } from "./api.js";
 
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "http://sbolin.crabdance.com"
+    ? "https://sbolin.crabdance.com"
     : "http://localhost:3001";
 
 const headers = { "Content-Type": "application/json" };
