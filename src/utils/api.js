@@ -1,6 +1,6 @@
 const baseUrl =
   process.env.NODE_ENV === "production"
-    ? "http://api.sbolin.crabdance.com"
+    ? "https://api.sbolin.crabdance.com"
     : "http://localhost:3001";
 
 const headers = { "Content-Type": "application/json" };
