@@ -88,6 +88,9 @@ This React app connects to an Express.js backend with MongoDB database:
 
 ### API Endpoints
 
+- **API Base URL**: `https://api.sbolin.crabdance.com`
+- **Frontend domain**: `https://sbolin.crabdance.com`
+
 #### Authentication
 
 - `POST /signup` - Register new user (name, avatar, email, password)
