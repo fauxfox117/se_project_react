@@ -25,7 +25,6 @@ export const addItem = ({ name, imageUrl, weather }, token) => {
 };
 
 export const removeItem = (itemId, token) => {
-  console.log("Deleting item with ID:", itemId);
   const authHeaders = token
     ? { ...headers, authorization: `Bearer ${token}` }
     : headers;
@@ -33,7 +32,6 @@ export const removeItem = (itemId, token) => {
     method: "DELETE",
     headers: authHeaders,
   }).then((res) => {
-    console.log("Delete response status:", res.status);
     return handleServerResponse(res);
   });
 };

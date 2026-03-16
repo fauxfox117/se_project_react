@@ -21,11 +21,9 @@ function ItemModal({ card, isOpen, onClose, onDeleteItem }) {
   };
 
   const handleConfirmDelete = () => {
-    onDeleteItem(card._id)
-      .then(() => {
-        setShowConfirm(false);
-      })
-      .catch(console.error);
+    onDeleteItem(card._id).then(() => {
+      setShowConfirm(false);
+    });
   };
 
   const handleCancelDelete = () => {
