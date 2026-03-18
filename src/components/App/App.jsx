@@ -65,7 +65,6 @@ function App() {
           setIsLoggedIn(true);
         })
         .catch((error) => {
-          console.error("Error checking token:", error);
           localStorage.removeItem("jwt");
           setIsLoggedIn(false);
         })
@@ -113,21 +112,17 @@ function App() {
     // Check if this card is not currently liked
     !isLiked
       ? // if so, send a request to add the user's id to the card's likes array
-        addCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
-            );
-          })
-          .catch((err) => console.log(err))
+        addCardLike(id, token).then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item)),
+          );
+        })
       : // if not, send a request to remove the user's id from the card's likes array
-        removeCardLike(id, token)
-          .then((updatedCard) => {
-            setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
-            );
-          })
-          .catch((err) => console.log(err));
+        removeCardLike(id, token).then((updatedCard) => {
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item)),
+          );
+        });
   };
 
   const onAddItem = (inputValues) => {
@@ -144,7 +139,7 @@ function App() {
         closeActiveModal();
       })
       .catch((error) => {
-        console.error("Error adding item:", error);
+        throw error;
       });
   };
 
@@ -158,7 +153,6 @@ function App() {
         closeActiveModal();
       })
       .catch((error) => {
-        console.error("Error deleting item:", error);
         throw error;
       });
   };
@@ -190,24 +184,19 @@ function App() {
         setWeatherData(processedData);
       })
       .catch((error) => {
-        console.error("Error getting location or weather:", error);
         // Fallback to default coordinates if geolocation fails
         const defaultCoordinates = {
           latitude: 34.85075,
           longitude: -82.398956,
         }; // GVL,SC
-        return getWeather(defaultCoordinates, apiKey)
-          .then((data) => {
-            const processedData = filterWeatherData(data);
-            setWeatherData(processedData);
-          })
-          .catch(console.error);
+        return getWeather(defaultCoordinates, apiKey).then((data) => {
+          const processedData = filterWeatherData(data);
+          setWeatherData(processedData);
+        });
       });
-    getItems()
-      .then((data) => {
-        setClothingItems([...data].reverse());
-      })
-      .catch(console.error);
+    getItems().then((data) => {
+      setClothingItems([...data].reverse());
+    });
   }, []);
 
   const convertTemperature = (temp, unit) => {

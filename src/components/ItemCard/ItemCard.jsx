@@ -24,7 +24,7 @@ function ItemCard({ item, onCardClick, onCardLike, isLoggedIn }) {
 
   return (
     <li className="card">
-      <div className="card__header">
+      <div className="card__name">
         <h2 className="card__title">{item.name}</h2>
         {isLoggedIn && (
           <button
