@@ -10,7 +10,7 @@ export const handleServerResponse = (res) => {
 };
 
 export const getItems = () => {
-  return fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
+  return fetch(`${baseUrl}/items`).then(handleServerResponse);
 };
 
 export const addItem = ({ name, imageUrl, weather }, token) => {
